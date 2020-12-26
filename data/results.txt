@@ -1,0 +1,30 @@
+/home/sad/Test/half dog.pdf
+/home/sad/Test/half dog.docx
+/home/sad/Test/space.docx
+/home/sad/Test/Поиск_1.doc
+/home/sad/Test/space.pdf
+/home/sad/Test/клякса from word2007.pdf
+/home/sad/Test/0измененный.jpg
+/home/sad/Test/dog.docx
+/home/sad/Test/dog.pdf
+/home/sad/Test/клякса.jpg
+/home/sad/Test/baddog.docx
+/home/sad/Test/burst.doc
+/home/sad/Test/half dog.jpg
+/home/sad/Test/space.jpg
+/home/sad/Test/baddog.pdf
+/home/sad/Test/0_GIMP.jpg
+/home/sad/Test/burst from libreoffice.pdf
+/home/sad/Test/space.png
+/home/sad/Test/dog.jpg
+/home/sad/Test/dog.odt
+/home/sad/Test/стул.jpg
+/home/sad/Test/burst.png
+/home/sad/Test/000000000.docx
+/home/sad/Test/0.jpg
+/home/sad/Test/dog.doc
+/home/sad/Test/2 (нет даты съемки).jpg
+/home/sad/Test/baddog.jpg
+/home/sad/Test/burst.docx
+/home/sad/Test/burst.pdf
+/home/sad/Test/1999.jpg
