@@ -5,16 +5,36 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.poifs.filesystem.DirectoryEntry;
 import org.apache.poi.poifs.filesystem.DocumentInputStream;
+import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import static util.DateBean.DateToString;
 import static util.DateBean.WindowsDate;
 import util.TimeBean;
 
-public class RawDoc {
+public class ApachePOI {
 
-    public static boolean AddMSOffice97_2003Meta(File file, Map<String, String> map) {
+    public static String getDocText(File file) {
+        WordExtractor extractor;
+        try {
+            NPOIFSFileSystem fs = new NPOIFSFileSystem(file);
+            extractor = new WordExtractor(fs.getRoot());
+        } catch (Exception|Error e) {
+            return null;
+        }
+        StringBuilder s=new StringBuilder();
+        for (String rawText : extractor.getParagraphText()) {
+            String text = extractor.stripFields(rawText);
+            s.append(text);
+        }
+        return s.toString();
+    }
+
+    public static boolean AddDocTags(File file, Map<String, String> map) {
         POIFSFileSystem fs;
         try {
             fs = new POIFSFileSystem(file);
@@ -107,7 +127,7 @@ public class RawDoc {
             case 0x12:
                 return getString(bb, addr);
             case 0x0A:
-                return TimeBean.valueOf(bb.getLong(addr + 4)/10000000).toString();
+                return TimeBean.valueOf(bb.getLong(addr + 4) / 10000000).toString();
             case 0x0B:
             case 0x0C:
             case 0x0D:

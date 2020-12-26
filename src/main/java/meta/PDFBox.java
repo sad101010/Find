@@ -1,9 +1,11 @@
 package meta;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
+import org.apache.pdfbox.text.PDFTextStripper;
 import static util.DateBean.DateToString;
 
 public class PDFBox {
@@ -41,6 +43,28 @@ public class PDFBox {
         try {
             doc.close();
         } catch (Exception | Error e) {
+        }
+    }
+
+    public static String getPDFText(File file) {
+        PDFTextStripper pdfStripper;
+        try {
+            pdfStripper = new PDFTextStripper();
+        } catch (IOException ex) {
+            return null;
+        }
+        pdfStripper.setStartPage(1);
+        PDDocument doc;
+        try {
+            doc = PDDocument.load(file);
+        } catch (IOException ex) {
+            return null;
+        }
+        pdfStripper.setEndPage(doc.getNumberOfPages());
+        try {
+            return pdfStripper.getText(doc);
+        } catch (IOException ex) {
+            return null;
         }
     }
 

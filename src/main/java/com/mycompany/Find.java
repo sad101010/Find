@@ -1,6 +1,5 @@
 package com.mycompany;
 
-import containers.crit.crit;
 import static util.util.err_msg;
 import static util.util.exit_with_err_msg;
 import static util.util.yn_promt;
@@ -9,14 +8,10 @@ import static util.directories.dirClear;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.util.Map;
-import java.util.TreeMap;
 import swing.dialog;
 import util.breader;
 
 import javax.swing.*;
-import static meta.RawDoc.AddMSOffice97_2003Meta;
-import static swing.util.pop_dialog;
 import util.thumbsdb;
 
 public class Find {
@@ -26,17 +21,7 @@ public class Find {
     public static final thumbsdb ThumbsDB = new thumbsdb();
 
     static {
-        Map<String, String> map = new TreeMap<>();
-        boolean result = AddMSOffice97_2003Meta(new File("doc.doc"), map);
-        for (Map.Entry<String, String> e : map.entrySet()) {
-            System.out.println(e.getKey() + ": " + e.getValue());
-        }
-        System.out.println("AddMSOffice97_2003Meta: " + result);
         /*try {
-            doZip();
-        } catch (IOException ex) {
-        }
-        try {
             System.setErr(new PrintStream(new FileOutputStream(new File("data/err.txt"))));
             System.setOut(new PrintStream(new FileOutputStream(new File("data/out.txt"))));
         } catch (Exception | Error e) {
@@ -95,7 +80,7 @@ public class Find {
                 }
             }
         });
-        pop_dialog(new crit(__dialog), __dialog);
+        //pop_dialog(new crit(__dialog), __dialog);
     }
 }
 /*

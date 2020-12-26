@@ -1,30 +1,58 @@
-/home/sad/Test/half dog.pdf
-/home/sad/Test/half dog.docx
-/home/sad/Test/space.docx
-/home/sad/Test/Поиск_1.doc
-/home/sad/Test/space.pdf
-/home/sad/Test/клякса from word2007.pdf
-/home/sad/Test/0измененный.jpg
-/home/sad/Test/dog.docx
-/home/sad/Test/dog.pdf
-/home/sad/Test/клякса.jpg
-/home/sad/Test/baddog.docx
-/home/sad/Test/burst.doc
-/home/sad/Test/half dog.jpg
-/home/sad/Test/space.jpg
-/home/sad/Test/baddog.pdf
-/home/sad/Test/0_GIMP.jpg
-/home/sad/Test/burst from libreoffice.pdf
-/home/sad/Test/space.png
-/home/sad/Test/dog.jpg
-/home/sad/Test/dog.odt
-/home/sad/Test/стул.jpg
-/home/sad/Test/burst.png
-/home/sad/Test/000000000.docx
-/home/sad/Test/0.jpg
-/home/sad/Test/dog.doc
-/home/sad/Test/2 (нет даты съемки).jpg
-/home/sad/Test/baddog.jpg
-/home/sad/Test/burst.docx
-/home/sad/Test/burst.pdf
-/home/sad/Test/1999.jpg
+/home/sad/Документы/______________ __.__.pdf
+/home/sad/Документы/Защита.pdf
+/home/sad/Документы/__________________.pdf
+/home/sad/Документы/ПЕЧАТЬ/Дневник преддипломной практики. Смирнов Д.А..pdf
+/home/sad/Документы/ПЕЧАТЬ/Данные для учета успеваемости студентов в БАРС. Смирнов Д. А. 631 группа.pdf
+/home/sad/Документы/ПЕЧАТЬ/Отчет о преддипломной практике. Смирнов Д. А. 631 группа.pdf
+/home/sad/Документы/клякса from word2007.pdf
+/home/sad/Документы/урок цифры/a1ab16db6224dc398abb4fc1f571fa49.pdf
+/home/sad/Документы/урок цифры/aaef2b023facbef74cf24f4331ffe746.pdf
+/home/sad/Документы/урок цифры/bdfe409b2039d31a80e3d4dd931ca9a0 (2).pdf
+/home/sad/Документы/урок цифры/95821937eafac5ca448f232777df3243.pdf
+/home/sad/Документы/урок цифры/1c88afbb03f8c5514db8f55c5efc9fb4.pdf
+/home/sad/Документы/урок цифры/7ad9dc3763960521054e94f09f276965.pdf
+/home/sad/Документы/урок цифры/bdfe409b2039d31a80e3d4dd931ca9a0.pdf
+/home/sad/Документы/______________ __.__0.pdf
+/home/sad/Документы/DLP.pdf
+/home/sad/Документы/8 __________.pdf
+/home/sad/Документы/______/Смирнов Д.А.pdf
+/home/sad/Документы/dipl.pdf
+/home/sad/Документы/sberbank_12-05-2020_22-53-511464493196.pdf
+/home/sad/Документы/кредиты/Kvitantsia1170161570.pdf
+/home/sad/Документы/кредиты/ul-1197746645326-20191213084809.pdf
+/home/sad/Документы/кредиты/ul-1197746645326-20191223214543.pdf
+/home/sad/Документы/кредиты/Справка Смирнов.pdf
+/home/sad/Документы/кредиты/Квитанция1.pdf
+/home/sad/Документы/кредиты/Квитанция(1).pdf
+/home/sad/Документы/кредиты/Квитанция.pdf
+/home/sad/Документы/кредиты/example_big_zaim.pdf
+/home/sad/Документы/кредиты/Квитанция297200146.pdf
+/home/sad/Документы/кредиты/Kvitantsia297200146.pdf
+/home/sad/Документы/кредиты/Квитанция1275683326.pdf
+/home/sad/Документы/кредиты/Квитанция1170161570.pdf
+/home/sad/Документы/кредиты/Квитанция543115391.pdf
+/home/sad/Документы/кредиты/Квитанция1417984905.pdf
+/home/sad/Документы/9 __________.pdf
+/home/sad/Документы/gost.pdf
+/home/sad/Документы/10 __________.pdf
+/home/sad/Документы/7 __________.pdf
+/home/sad/Документы/fgos_ru_sred.pdf.pdf
+/home/sad/Документы/10_demo-1.pdf
+/home/sad/Документы/печать/титульный.pdf
+/home/sad/Документы/печать/bars2.pdf
+/home/sad/Документы/печать/bars.pdf
+/home/sad/Документы/Файловый ввод-вывод.pdf
+/home/sad/Документы/fgos_ru_osnov.pdf.pdf
+/home/sad/Документы/meta_vertical_26_56.pdf
+/home/sad/Документы/1337d22e-e733-4cb7-b2ff-6b5b42392d87.pdf
+/home/sad/Документы/11 __________.pdf
+/home/sad/Документы/meta_vertical_2_24.pdf
+/home/sad/Документы/_________________________________________________4.pdf
+/home/sad/mvn_try_push_to_git/mvn_find/______________ __.__.pdf
+/home/sad/TestCurrent/Без имени 2.pdf
+/home/sad/TestCurrent/Без имени 3.pdf
+/home/sad/TestCurrent/Без имени 1.pdf
+/home/sad/TestCurrent/odt to pdf dog.pdf
+/home/sad/Видео/631 Смирнов Д. А. Преддипломная практика/Дневник преддипломной практики. Смирнов Д.А..pdf
+/home/sad/Видео/631 Смирнов Д. А. Преддипломная практика/Данные для учета успеваемости студентов в БАРС. Смирнов Д. А. 631 группа.pdf
+/home/sad/Видео/631 Смирнов Д. А. Преддипломная практика/Отчет о преддипломной практике. Смирнов Д. А. 631 группа.pdf

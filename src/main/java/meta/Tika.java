@@ -7,9 +7,22 @@ import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.parser.ParseContext;
 import org.apache.tika.sax.BodyContentHandler;
-import static util.util.getPath;
 
 public class Tika {
+
+    public static String get_text_from_file(File file) {
+        if (file == null || file.length() == 0) {
+            return null;
+        }
+        AutoDetectParser parser = new AutoDetectParser();
+        BodyContentHandler handler = new BodyContentHandler();
+        try {
+            parser.parse(new FileInputStream(file), handler, new Metadata(), new ParseContext());
+            return handler.toString();
+        } catch (Exception | Error e) {
+            return null;
+        }
+    }
 
     static void add_text_from_file(Map map, File file) {
         if (file == null || file.length() == 0) {
