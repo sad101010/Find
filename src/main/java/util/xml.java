@@ -1,70 +1,89 @@
 package util;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Enumeration;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import org.apache.commons.io.FilenameUtils;
+import static meta.db.mimedb;
+import static meta.type.parseFieldValue;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class xml {
 
-    public static void load_xml(InputStream inputStream) {
-        try {
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document document = documentBuilder.parse(inputStream);
-            NodeList nodeList = document.getDocumentElement().getChildNodes();
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Node node = nodeList.item(i);
-                System.out.println("+++++++++++++++++++");
-                System.out.println(node.getNodeName());
-                System.out.println("-------------------");
-                System.out.println(node.getTextContent());
-                System.out.println("===================");
-            }
-        } catch (Exception | Error e) {
-        }
-    }
+    private static final Map<String, String> DocxNames = mimedb.get("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
 
-    public static void doZip() throws IOException {
-        ZipFile zip = new ZipFile("docx.docx");
+    public static boolean AddDocxTags(File file, Map<String, String> map) {
+        ZipFile zip;
+        try {
+            zip = new ZipFile(file);
+        } catch (IOException ex) {
+            return false;
+        }
         for (Enumeration e = zip.entries(); e.hasMoreElements();) {
             ZipEntry entry = (ZipEntry) e.nextElement();
             if (entry.isDirectory()) {
                 continue;
             }
-            switch(entry.getName()){
+            switch (entry.getName()) {
                 case "docProps/core.xml":
                 case "docProps/app.xml":
                     break;
                 default:
                     continue;
             }
-            System.out.println("-->" + entry.getName());
-            if (FilenameUtils.getExtension(entry.getName()).equals("xml")) {
-                load_xml(zip.getInputStream(entry));
+            InputStream inputStream;
+            try {
+                inputStream = zip.getInputStream(entry);
+                if (!load_xml(inputStream, map)) {
+                    System.out.println("load_xml error");
+                    return false;
+                }
+                inputStream.close();
+            } catch (Exception | Error ee) {
+                System.out.println("load_xml exception");
+                ee.printStackTrace();
+                return false;
             }
         }
+        return true;
     }
 
-    private static StringBuilder getTxtFiles(InputStream in) {
-        StringBuilder out = new StringBuilder();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-        String line;
+    public static boolean load_xml(InputStream inputStream, Map<String, String> map) {
+        DocumentBuilder documentBuilder;
+        Document document;
         try {
-            while ((line = reader.readLine()) != null) {
-                out.append(line);
-            }
-        } catch (IOException e) {
+            documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            document = documentBuilder.parse(inputStream);
+        } catch (Exception | Error e) {
+            return false;
         }
-        return out;
+        NodeList nodeList = document.getDocumentElement().getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node node = nodeList.item(i);
+            String name = DocxNames.get(node.getNodeName());
+            if (name == null) {
+                System.err.println("DocxNames does not have name: " + node.getNodeName());
+                return false;
+            }
+            Object value;
+            if (name.equals("Время редактирования")) {
+                value = TimeBean.valueOf(Long.valueOf(node.getTextContent()));
+            } else {
+                value = parseFieldValue(name, node.getTextContent());
+            }
+            if (value == null) {
+                System.err.println("DocxNames null object: " + node.getNodeName() + " -> " + node.getTextContent());
+                return false;
+            }
+            map.put(name, value.toString());
+        }
+        return true;
     }
 }

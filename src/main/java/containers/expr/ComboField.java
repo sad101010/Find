@@ -94,7 +94,7 @@ public class ComboField {
                 append_middle_bottom(formatLabel, textField);
                 formatLabel.setVisible(true);
                 break;
-            case "@Date":
+            case "@DateBean":
                 dateField.setVisible(true);
                 formatLabel.setText("Формат - дд.мм.гггг");
                 fit(formatLabel);

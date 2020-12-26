@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import static meta.FAttr.FAttrFields;
 import static meta.db.mimedb;
-import static util.DateBean.StringToDate;
+import util.DateBean;
 import util.TimeBean;
 import util.breader;
 import static util.util.exit_with_err_msg;
@@ -75,8 +75,8 @@ public class type {
             }
             case "@TimeBean":
                 return TimeBean.valueOf(value);
-            case "@Date":
-                return StringToDate(value);
+            case "@DateBean":
+                return DateBean.valueOf(value);
             case "@String":
                 return value;
             default:

@@ -4,12 +4,11 @@ import static expr.analyze.analyze;
 import static expr.expr.polish_notation;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.Date;
 import java.util.Map;
 import java.util.ArrayList;
 import static meta.Tika.get_mime;
 import static meta.meta.getSmartMeta;
-import static util.DateBean.StringToDate;
+import util.DateBean;
 import util.TimeBean;
 
 import static util.img.loadBufferedImage;
@@ -44,9 +43,9 @@ public class check {
 
     private static boolean compareExpression(Object value, char sign, Object userValue) {
         int comparison_result;
-        if (userValue instanceof Date) {
-            Date dateValue = StringToDate((String) value);
-            comparison_result = dateValue.compareTo((Date) userValue);
+        if (userValue instanceof DateBean) {
+            DateBean dateValue = DateBean.valueOf((String) value);
+            comparison_result = dateValue.compareTo((DateBean) userValue);
         } else if (userValue instanceof Long) {
             Long longValue = Long.valueOf((String) value);
             comparison_result = longValue.compareTo((Long) userValue);

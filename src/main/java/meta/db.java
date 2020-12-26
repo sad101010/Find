@@ -11,14 +11,14 @@ import java.util.TreeSet;
 import static meta.Tika.dirt;
 import static meta.map.mime_map;
 import static meta.type.getFieldType;
-import static util.DateBean.TryParseDate;
+import util.DateBean;
 import static util.TimeBean.try_parse_doucument_edit_time;
 import static util.directories.dirClear;
 import static util.util.exit_with_err_msg;
 
 public class db {
 
-    static Map<String, Map<String, String>> mimedb = new TreeMap<String, Map<String, String>>();
+    public static Map<String, Map<String, String>> mimedb = new TreeMap<String, Map<String, String>>();
     private static int cat_length;
 
     static {
@@ -140,7 +140,7 @@ public class db {
                 continue;
             }
             if (map.containsKey(name)) {
-                System.err.println("metadata duplicate > " + dirty_name+" == "+name+" @ "+mime);
+                System.err.println("metadata duplicate > " + dirty_name + " == " + name + " @ " + mime);
                 continue;
             }
             String value = metadata.get(dirty_name);
@@ -149,8 +149,8 @@ public class db {
                 continue;
             }
             switch (getFieldType(name)) {
-                case "@Date":
-                    map.put(name, TryParseDate(value));
+                case "@DateBean":
+                    map.put(name, DateBean.valueOf(value).toString());
                     break;
                 case "@TimeBean":
                     map.put(name, try_parse_doucument_edit_time(value, mime));

@@ -7,7 +7,7 @@ import java.nio.file.attribute.FileTime;
 import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
-import static util.DateBean.DateToString;
+import util.DateBean;
 
 public class FAttr {
 
@@ -36,33 +36,19 @@ public class FAttr {
         } catch (Exception | Error e) {
             return result;
         }
-        if (attr.creationTime() != null) {
-            String s = FileTimeToString(attr.creationTime());
-            if (s != null) {
-                result.put("Дата создания файла", s);
-            }
+        DateBean dateBean = DateBean.valueOf(attr.creationTime());
+        if (dateBean != null) {
+            result.put("Дата создания файла", dateBean.toString());
         }
-        if (attr.lastAccessTime() != null) {
-            String s = FileTimeToString(attr.lastAccessTime());
-            if (s != null) {
-                result.put("Дата последнего доступа к файлу", s);
-            }
+        dateBean = DateBean.valueOf(attr.lastAccessTime());
+        if (dateBean != null) {
+            result.put("Дата последнего доступа к файлу", dateBean.toString());
         }
-        if (attr.lastModifiedTime() != null) {
-            String s = FileTimeToString(attr.lastModifiedTime());
-            if (s != null) {
-                result.put("Дата последнего изменения файла", s);
-            }
+        dateBean = DateBean.valueOf(attr.lastModifiedTime());
+        if (dateBean != null) {
+            result.put("Дата последнего изменения файла", dateBean.toString());
         }
         return result;
-    }
-
-    private static String FileTimeToString(FileTime time) {
-        if (time == null) {
-            return null;
-        }
-        Date date = new Date(time.toMillis());
-        return DateToString(date);
     }
 
     public static Map get_file_attr(File file) {

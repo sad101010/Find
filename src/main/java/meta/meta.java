@@ -3,6 +3,7 @@ package meta;
 import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
+import static meta.ApachePOI.AddDocTags;
 import static meta.FAttr.add_file_attr;
 import static meta.PDFBox.addPdfTags;
 import static meta.Tika.get_mime;
@@ -10,10 +11,11 @@ import static meta.Tika.add_text_from_file;
 import static meta.db.add_names;
 import static meta.img.addImgNames;
 import static meta.img.add_images_from_document;
+import static util.xml.AddDocxTags;
 
 public class meta {
-    
-    private static void addMetaFields(Map map, File file){
+
+    private static void addMetaFields(Map map, File file) {
         switch (get_mime(file)) {
             case "image/jpeg":
             case "image/png":
@@ -22,10 +24,16 @@ public class meta {
             case "application/pdf":
                 addPdfTags(file, map);
                 break;
+            case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+                AddDocxTags(file, map);
+                break;
+            case "application/msword":
+                AddDocTags(file, map);
+                break;
             default:
                 add_names(map, file);
                 break;
-        }        
+        }
     }
 
     public static Map getSmartMeta(File file) {
@@ -34,10 +42,10 @@ public class meta {
             add_file_attr(file, result);
         }
         if (expr.check.text != null) {
-            add_text_from_file(result,file);
+            add_text_from_file(result, file);
         }
         if (expr.analyze.need_img()) {
-            add_images_from_document(result,file);
+            add_images_from_document(result, file);
         }
         if (expr.analyze.need_metadata()) {
             addMetaFields(result, file);

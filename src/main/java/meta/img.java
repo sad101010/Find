@@ -27,7 +27,7 @@ import static meta.type.getFieldType;
 import org.apache.pdfbox.pdmodel.graphics.PDXObject;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Picture;
-import static util.DateBean.DateToString;
+import util.DateBean;
 import static util.img.loadBufferedImage;
 
 public class img {
@@ -176,8 +176,8 @@ public class img {
                     case "@Long":
                         value = String.valueOf(directory.getLongObject(tagType));
                         break;
-                    case "@Date":
-                        value = DateToString(directory.getDate(tagType));
+                    case "@DateBean":
+                        value = DateBean.valueOf(directory.getDate(tagType)).toString();
                         break;
                     case "@String":
                         value = directory.getString(tagType);

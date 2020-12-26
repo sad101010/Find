@@ -1,42 +1,42 @@
 @Изображения
 Изображения
-Application-Name
+Application
 Имя программы
-Author
+dc:creator
 Автор
-Character Count
+Characters
 Количество символов
-Character-Count-With-Spaces
+CharactersWithSpaces
 Количество символов, включая пробелы
-Creation-Date
+dcterms:created
 Дата создания
-Last-Author
+cp:lastModifiedBy
 Последний автор
-Last-Modified
+dcterms:modified
 Дата последнего изменения
-Last-Printed
+НЕ ЗАПОЛНЕНО
 Дата последней печати
-Last-Save-Date
+НЕ ЗАПОЛНЕНО
 Дата последнего сохранения
-Line-Count
+НЕ ЗАПОЛНЕНО
 Количество строк
-Page-Count
+Pages
 Количество страниц
-Paragraph-Count
+Paragraphs
 Количество абзацев
-Revision-Number
-Количество сохранений
+cp:revision
+Редакция
 Template
 Шаблон
-Total-Time
+TotalTime
 Время редактирования
-Word-Count
+Words
 Количество слов
-description
+dc:description
 Описание
-language
+dc:language
 Язык
-subject
+dc:subject
 Тема
-title
+dc:title
 Название

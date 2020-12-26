@@ -8,11 +8,14 @@ import static util.directories.dirClear;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.util.Map;
+import java.util.TreeMap;
 import swing.dialog;
 import util.breader;
 
 import javax.swing.*;
 import util.thumbsdb;
+import static util.xml.AddDocxTags;
 
 public class Find {
 
@@ -21,6 +24,11 @@ public class Find {
     public static final thumbsdb ThumbsDB = new thumbsdb();
 
     static {
+        Map<String, String> map = new TreeMap<>();
+        System.out.println("AddDocxTags: " + AddDocxTags(new File("docx.docx"), map));
+        for (Map.Entry<String, String> e : map.entrySet()) {
+            System.out.println(e.getKey() + " -> " + e.getValue());
+        }
         /*try {
             System.setErr(new PrintStream(new FileOutputStream(new File("data/err.txt"))));
             System.setOut(new PrintStream(new FileOutputStream(new File("data/out.txt"))));

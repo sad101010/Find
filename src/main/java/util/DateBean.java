@@ -5,49 +5,54 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateBean {
+public class DateBean extends Date {
 
-    public static Date WindowsDate(long _100Nanos) {
-        //https://stackoverflow.com/questions/5200192/convert-64-bit-windows-number-to-time-java
-        return new Date((_100Nanos - 116444736000000000L) / 10000);
+    @Override
+    public String toString() {
+        DateFormat f = new SimpleDateFormat(formats[0]);
+        return f.format(this);
     }
 
     private static final String formats[] = {
-        "dd.MM.yyyy HH:mm:ss",
+        "dd.MM.yyyy",
         "yyyy:MM:dd",
         "yyyy-MM-dd",
         "dd/MM/yyyy"
     };
 
-    public static String DateToString(Date date) {
-        DateFormat f = new SimpleDateFormat(formats[0]);
-        if (date == null) {
-            return null;
-        }
-        return f.format(date);
+    public static DateBean MSFileTimeToDateBean(long _100Nanos) {
+        //https://stackoverflow.com/questions/5200192/convert-64-bit-windows-number-to-time-java
+        return new DateBean((_100Nanos - 116444736000000000L) / 10000);
     }
 
-    public static String FileTimeToString(FileTime time) {
+    public static DateBean valueOf(FileTime time) {
         if (time == null) {
             return null;
         }
-        Date date = new Date(time.toMillis());
-        return DateToString(date);
+        return new DateBean(time.toMillis());
     }
 
-    public static Date StringToDate(String string_date) {
+    public static DateBean valueOf(String string_date) {
         for (String s : formats) {
             SimpleDateFormat f = new SimpleDateFormat(s);
             try {
-                return f.parse(string_date);
+                return new DateBean(f.parse(string_date).getTime());
             } catch (Exception | Error e) {
             }
         }
         return null;
     }
 
-    public static String TryParseDate(String s) {
-        Date date = StringToDate(s);
-        return date == null ? s : DateToString(date);
+    public static DateBean valueOf(Date date) {
+        return new DateBean(date.getTime());
     }
+
+    private DateBean(long milis) {
+        super(milis);
+    }
+
+    /*public static String TryParseDate(String s) {
+        DateBean dateBean = valueOf(s);
+        return dateBean == null ? s : dateBean.toString();
+    }*/
 }

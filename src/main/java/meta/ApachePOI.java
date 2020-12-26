@@ -5,15 +5,12 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.poifs.filesystem.DirectoryEntry;
 import org.apache.poi.poifs.filesystem.DocumentInputStream;
 import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import static util.DateBean.DateToString;
-import static util.DateBean.WindowsDate;
+import util.DateBean;
 import util.TimeBean;
 
 public class ApachePOI {
@@ -131,7 +128,7 @@ public class ApachePOI {
             case 0x0B:
             case 0x0C:
             case 0x0D:
-                return DateToString(WindowsDate(bb.getLong(addr + 4)));
+                return DateBean.MSFileTimeToDateBean(bb.getLong(addr + 4)).toString();
             case 0x0E:
             case 0x0F:
             case 0x10:

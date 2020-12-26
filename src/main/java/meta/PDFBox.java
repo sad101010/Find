@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.apache.pdfbox.text.PDFTextStripper;
-import static util.DateBean.DateToString;
+import util.DateBean;
 
 public class PDFBox {
 
@@ -35,10 +35,10 @@ public class PDFBox {
             map.put("Имя программы", info.getProducer());
         }
         if (info.getCreationDate() != null) {
-            map.put("Дата создания", DateToString(info.getCreationDate().getTime()));
+            map.put("Дата создания", DateBean.valueOf(info.getCreationDate().getTime()).toString());
         }
         if (info.getModificationDate() != null) {
-            map.put("Дата последнего изменения", DateToString(info.getModificationDate().getTime()));
+            map.put("Дата последнего изменения", DateBean.valueOf(info.getModificationDate().getTime()).toString());
         }
         try {
             doc.close();

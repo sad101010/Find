@@ -14,6 +14,12 @@ public class Tika {
         if (file == null || file.length() == 0) {
             return null;
         }
+        switch (get_mime(file)) {
+            case "application/pdf":
+                return PDFBox.getPDFText(file);
+            case "application/msword":
+                return ApachePOI.getDocText(file);
+        }
         AutoDetectParser parser = new AutoDetectParser();
         BodyContentHandler handler = new BodyContentHandler();
         try {
@@ -25,16 +31,11 @@ public class Tika {
     }
 
     static void add_text_from_file(Map map, File file) {
-        if (file == null || file.length() == 0) {
+        String s = get_text_from_file(file);
+        if (s == null) {
             return;
         }
-        AutoDetectParser parser = new AutoDetectParser();
-        BodyContentHandler handler = new BodyContentHandler();
-        try {
-            parser.parse(new FileInputStream(file), handler, new Metadata(), new ParseContext());
-            map.put("Внутренний текст", handler.toString());
-        } catch (Exception | Error e) {
-        }
+        map.put("Внутренний текст", s);
     }
 
     public static Metadata dirt(File file) {
