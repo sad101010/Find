@@ -1,36 +1,28 @@
-Author
+meta:initial-creator
 Автор
-Character Count
+meta:character-count
 Количество символов
-Creation-Date
+meta:creation-date
 Дата создания
-Edit-Time
+meta:editing-duration
 Время редактирования
-Image-Count
+meta:non-whitespace-character-count
+Количество символов, не считая пробельных
+meta:image-count
 Количество изображений
-Last-Modified
-Дата последнего изменения
-Last-Save-Date
-Дата последнего сохранения
-Object-Count
+meta:object-count
 Количество объектов
-Page-Count
+meta:page-count
 Количество страниц
-Paragraph-Count
+meta:paragraph-count
 Количество абзацев
-Table-Count
+meta:table-count
 Количество таблиц
-Word-Count
+meta:word-count
 Количество слов
-description
-Описание
-editing-cycles
+meta:editing-cycles
 Редакция
-generator
+meta:generator
 Имя программы
-language
-Язык
-subject
-Тема
-title
+dc:title
 Название

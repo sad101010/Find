@@ -55,7 +55,7 @@ public class xml {
         return true;
     }
 
-    public static boolean load_xml(InputStream inputStream, Map<String, String> map) {
+    private static boolean load_xml(InputStream inputStream, Map<String, String> map) {
         DocumentBuilder documentBuilder;
         Document document;
         try {

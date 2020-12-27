@@ -14,8 +14,8 @@ import swing.dialog;
 import util.breader;
 
 import javax.swing.*;
+import static util.ODF.AddOdtTags;
 import util.thumbsdb;
-import static util.xml.AddDocxTags;
 
 public class Find {
 
@@ -25,7 +25,7 @@ public class Find {
 
     static {
         Map<String, String> map = new TreeMap<>();
-        System.out.println("AddDocxTags: " + AddDocxTags(new File("docx.docx"), map));
+        System.out.println("AddOdtTags: " + AddOdtTags(new File("odt.odt"), map));
         for (Map.Entry<String, String> e : map.entrySet()) {
             System.out.println(e.getKey() + " -> " + e.getValue());
         }

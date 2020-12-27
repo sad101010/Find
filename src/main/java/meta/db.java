@@ -18,7 +18,7 @@ import static util.util.exit_with_err_msg;
 
 public class db {
 
-    public static Map<String, Map<String, String>> mimedb = new TreeMap<String, Map<String, String>>();
+    public static final Map<String, Map<String, String>> mimedb = new TreeMap<String, Map<String, String>>();
     private static int cat_length;
 
     static {
