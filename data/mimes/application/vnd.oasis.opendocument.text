@@ -4,8 +4,6 @@ meta:character-count
 Количество символов
 meta:creation-date
 Дата создания
-meta:editing-duration
-Время редактирования
 meta:non-whitespace-character-count
 Количество символов, не считая пробельных
 meta:image-count
@@ -26,3 +24,5 @@ meta:generator
 Имя программы
 dc:title
 Название
+dc:subject
+Тема

@@ -12,7 +12,6 @@ import static meta.Tika.dirt;
 import static meta.map.mime_map;
 import static meta.type.getFieldType;
 import util.DateBean;
-import static util.TimeBean.try_parse_doucument_edit_time;
 import static util.directories.dirClear;
 import static util.util.exit_with_err_msg;
 
@@ -151,9 +150,6 @@ public class db {
             switch (getFieldType(name)) {
                 case "@DateBean":
                     map.put(name, DateBean.valueOf(value).toString());
-                    break;
-                case "@TimeBean":
-                    map.put(name, try_parse_doucument_edit_time(value, mime));
                     break;
                 case "@Long":
                 case "@String":

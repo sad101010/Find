@@ -2,89 +2,96 @@ package util;
 
 import java.io.File;
 import java.io.InputStream;
+import java.time.Duration;
 import java.util.Map;
-import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import static meta.db.mimedb;
+import meta.type;
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class ODF {
 
     private static final Map<String, String> OdtNames = mimedb.get("application/vnd.oasis.opendocument.text");
 
-    public static boolean AddOdtTags(File file, Map<String, String> map) {
+    public static boolean AddOdtTags(File zipFile, Map<String, String> map) {
         //dc:date - неизвестный таг
         ZipFile zip;
         try {
-            zip = new ZipFile(file);
+            zip = new ZipFile(zipFile);
         } catch (Exception | Error e) {
             return false;
         }
-        ZipEntry entry = zip.getEntry("meta.xml");
         InputStream inputStream;
         try {
-            inputStream = zip.getInputStream(entry);
-            if (!load_xml(inputStream, map)) {
-                System.out.println("load_xml error");
-                return false;
-            }
+            inputStream = zip.getInputStream(zip.getEntry("meta.xml"));
+        } catch (Exception | Error e) {
+            return false;
+        }
+        if (!load_xml(inputStream, map)) {
+            return false;
+        }
+        try {
             inputStream.close();
-        } catch (Exception | Error ee) {
-            System.out.println("load_xml exception");
-            ee.printStackTrace();
+        } catch (Exception | Error e) {
             return false;
         }
         return true;
     }
 
     private static boolean load_xml(InputStream inputStream, Map<String, String> map) {
-        DocumentBuilder documentBuilder;
         Document document;
         try {
-            documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            document = documentBuilder.parse(inputStream);
+            document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputStream);
         } catch (Exception | Error e) {
             return false;
         }
-        xml(document.getDocumentElement(), map);
+        Node node = document.getDocumentElement();
+        while (node != null && !node.getNodeName().equals("office:document-meta")) {
+            node = node.getNextSibling();
+        }
+        if (node == null) {
+            return false;
+        }
+        node = node.getFirstChild();
+        while (node != null && !node.getNodeName().equals("office:meta")) {
+            node = node.getNextSibling();
+        }
+        if (node == null) {
+            return false;
+        }
+        node = node.getFirstChild();
+        while (node != null) {
+            if (node.getNodeName().equals("meta:document-statistic")) {
+                NamedNodeMap attr = node.getAttributes();
+                for (int i = 0; i < attr.getLength(); i++) {
+                    Node item = attr.item(i);
+                    put(item.getNodeName(), item.getTextContent(), map);
+                }
+            } else {
+                if (node.getNodeName().equals("meta:editing-duration")) {
+                    Duration dur = Duration.parse(node.getTextContent());
+                    TimeBean timeBean = TimeBean.valueOf(dur.toMillis() / 1000);
+                    map.put("Время редактирования", timeBean.toString());
+                } else {
+                    put(node.getNodeName(), node.getTextContent(), map);
+                }
+            }
+            node = node.getNextSibling();
+        }
         return true;
     }
 
-    private static boolean isLeaf(Node node) {
-        if (!node.hasChildNodes()) {
-            return true;
-        }
-        NodeList nodeList = node.getChildNodes();
-        if (nodeList.getLength() > 1) {
-            return false;
-        }
-        if (nodeList.getLength() < 1) {
-            return true;
-        }
-        return !nodeList.item(0).hasChildNodes();
-    }
-
-    private static void xml(Node node, Map<String, String> map) {
-        String name = node.getNodeName();
-        if (node.getAttributes() != null) {
-            for (int i = 0; i < node.getAttributes().getLength(); i++) {
-                xml(node.getAttributes().item(i), map);
-            }
-        }
-        if (!isLeaf(node)) {
-            for (int i = 0; i < node.getChildNodes().getLength(); i++) {
-                xml(node.getChildNodes().item(i), map);
-            }
-            return;
-        }
+    private static void put(String name, String value, Map<String, String> map) {
         if (OdtNames.get(name) == null) {
-            //System.err.println("Odt: неизвестное имя " + name);
+            System.err.println("ODF: неизвестное имя " + name);
             return;
         }
-        map.put(OdtNames.get(name), node.getTextContent());
+        String rusName = OdtNames.get(name);
+        Object obj = type.parseFieldValue(rusName, value);
+        map.put(rusName, obj.toString());
     }
 }
