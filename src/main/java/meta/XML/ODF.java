@@ -1,17 +1,17 @@
-package util;
+package meta.XML;
 
 import java.io.File;
 import java.io.InputStream;
 import java.time.Duration;
 import java.util.Map;
 import java.util.zip.ZipFile;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import static meta.db.mimedb;
 import meta.type;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import util.TimeBean;
 
 public class ODF {
 
@@ -49,21 +49,16 @@ public class ODF {
         } catch (Exception | Error e) {
             return false;
         }
-        Node node = document.getDocumentElement();
-        while (node != null && !node.getNodeName().equals("office:document-meta")) {
-            node = node.getNextSibling();
-        }
-        if (node == null) {
+        //можно аккуратнее
+        Node node;
+        try {
+            node = document.getDocumentElement().getFirstChild().getFirstChild();
+        } catch (Exception | Error e) {
             return false;
         }
-        node = node.getFirstChild();
-        while (node != null && !node.getNodeName().equals("office:meta")) {
-            node = node.getNextSibling();
-        }
-        if (node == null) {
+        if (!node.getParentNode().getNodeName().equals("office:document-meta") || !node.getNodeName().equals("office:meta")) {
             return false;
         }
-        node = node.getFirstChild();
         while (node != null) {
             if (node.getNodeName().equals("meta:document-statistic")) {
                 NamedNodeMap attr = node.getAttributes();

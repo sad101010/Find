@@ -22,9 +22,9 @@ public final class dialog extends JDialog {
         dlg.setLayout(null);
         dlg.setResizable(false);
         JLabel label = new JLabel("Загрузка...");
-        dlg.add(label);
         setxy(label, 3, 3);
         util.fit(label);
+        dlg.add(label);
         setsize(dlg, label.getWidth() + 100, label.getHeight() + 100);
         try {
             SwingUtilities.invokeAndWait(new Runnable() {

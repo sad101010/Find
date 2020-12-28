@@ -9,6 +9,17 @@ import java.util.Calendar;
 
 public class util {
 
+    public static String get_mime(File file) {
+        if (file == null) {
+            return null;
+        }
+        try {
+            return Files.probeContentType(file.toPath());
+        } catch (Exception | Error e) {
+            return null;
+        }
+    }
+
     public static String current_time() {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         return format.format(Calendar.getInstance().getTime());
@@ -41,9 +52,10 @@ public class util {
 
     public static boolean BadOrSymLink(File file) {
         try {
-            //если файл из одной ФС был перемещен в другую
-            //и возникла ошибка - нельзя использовать
-            //некоторые символы в именах - try-catch
+            //При перемещении из одной ФС в другую
+            //некоторые симмолы в названиях могут
+            //стать запрещенными (какие-нибудь !@#$ под Windows).
+            //Это может привести к ошибкам
             if (Files.isSymbolicLink(file.toPath())) {
                 //проверено: символические ссылки есть
                 return true;

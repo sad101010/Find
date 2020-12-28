@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.imageio.ImageIO;
-import static meta.Tika.get_mime;
 import static util.img.argb_img_resize;
 
 public class thumbsdb {
@@ -16,13 +15,9 @@ public class thumbsdb {
 
     synchronized public void add(String pathToFile) {
         File file = new File(pathToFile);
-        String mime=get_mime(file);
-        switch(mime){
-            case "image/jpeg":
-            case "image/png":
-                break;
-            default:
-                return;
+        BufferedImage thumb = mkthumb(file);
+        if (thumb == null) {
+            return;
         }
         if (pathMap.containsKey(pathToFile)) {
             return;
@@ -31,7 +26,7 @@ public class thumbsdb {
         pathMap.put(pathToFile, id);
         pathList.add(pathToFile);
         try {
-            ImageIO.write(mkthumb(file), "png", new File("data/thumbnails/" + id + ".png"));
+            ImageIO.write(thumb, "png", new File("data/thumbnails/" + id + ".png"));
         } catch (Exception | Error e) {
         }
     }

@@ -1,6 +1,5 @@
 package meta;
 
-import org.apache.tika.metadata.Metadata;
 import util.breader;
 import java.io.File;
 import java.io.PrintWriter;
@@ -8,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import static meta.Tika.dirt;
 import static meta.map.mime_map;
 import static meta.type.getFieldType;
 import util.DateBean;
@@ -111,60 +109,6 @@ public class db {
                 writer.println(e.getValue());
             }
             writer.close();
-        }
-    }
-
-    static void add_names(Map map, File file) {
-        Metadata metadata = dirt(file);
-        if (metadata == null) {
-            //проверено, грязные метаданные могут быть null
-            return;
-        }
-        String mime = metadata.get(Metadata.CONTENT_TYPE);
-        if (mime == null || !mime_map.containsKey(mime)) {
-            return;
-        }
-        Map<String, String> names = mimedb.get(mime);
-        if (names == null) {
-            //нет необходимости так как уже проверка по mime была
-            //но на всякий случай...
-            return;
-        }
-        for (String dirty_name : metadata.names()) {
-            if (metadata.isMultiValued(dirty_name)) {
-                continue;
-            }
-            String name = names.get(dirty_name);
-            if (name == null || name.equals(dirty_name)) {
-                continue;
-            }
-            if (map.containsKey(name)) {
-                System.err.println("metadata duplicate > " + dirty_name + " == " + name + " @ " + mime);
-                continue;
-            }
-            String value = metadata.get(dirty_name);
-            if (value == null) {
-                //в исходниках Tika может возвращать null
-                continue;
-            }
-            switch (getFieldType(name)) {
-                case "@DateBean":
-                    map.put(name, DateBean.valueOf(value).toString());
-                    break;
-                case "@Long":
-                case "@String":
-                    map.put(name, value);
-                    break;
-            }
-        }
-        switch (mime) {
-            case "application/vnd.ms-excel":
-            case "application/msword":
-            case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
-            case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                if (map.get("Время редактирования") == null) {
-                    map.put("Время редактирования", "00:00:00");
-                }
         }
     }
 

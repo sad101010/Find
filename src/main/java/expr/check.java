@@ -6,13 +6,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Map;
 import java.util.ArrayList;
-import static meta.Tika.get_mime;
 import static meta.meta.getSmartMeta;
 import util.DateBean;
 import util.TimeBean;
 
 import static util.img.loadBufferedImage;
 import static util.img.bufferedImagesEqual;
+import static util.util.get_mime;
 import static util.util.stringIsBlank;
 
 public class check {

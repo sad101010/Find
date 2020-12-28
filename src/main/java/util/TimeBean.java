@@ -1,12 +1,9 @@
 package util;
 
-import java.time.Duration;
-import java.util.Date;
-
 public class TimeBean {
 
-    private long sec;
-    private long min;
+    private final long sec;
+    private final long min;
     private final long hour;
 
     public long getSec() {
@@ -22,11 +19,11 @@ public class TimeBean {
     }
 
     private TimeBean(long seconds) {
-        sec = seconds;
-        min = sec / 60;
-        sec %= 60;
-        hour = min / 60;
-        min %= 60;
+        sec = seconds % 60;
+        seconds /= 60;
+        min = seconds % 60;
+        seconds /= 60;
+        hour = seconds % 60;
     }
 
     public static TimeBean valueOf(long seconds) {

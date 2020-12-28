@@ -3,32 +3,15 @@ package meta;
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Tag;
-import org.apache.pdfbox.cos.COSName;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDResources;
-import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFPictureData;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.Iterator;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import static meta.Tika.get_mime;
+import static meta.ApachePOI.img_from_doc;
+import static meta.ApachePOI.img_from_docx;
+import static meta.PDFBox.img_from_pdf;
 import static meta.db.mimedb;
 import static meta.type.getFieldType;
-import org.apache.pdfbox.pdmodel.graphics.PDXObject;
-import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.usermodel.Picture;
 import util.DateBean;
-import static util.img.loadBufferedImage;
+import static util.util.get_mime;
 
 public class img {
 
@@ -45,90 +28,6 @@ public class img {
                 map.put("Изображения", img_from_pdf(file));
                 break;
         }
-    }
-
-    public static ArrayList<BufferedImage> img_from_pdf(File file) {
-        PDDocument document;
-        try {
-            document = PDDocument.load(file);
-        } catch (Exception | Error e) {
-            System.err.println("err img_from_pdf");
-            return null;
-        }
-        ArrayList res = new ArrayList();
-        for (PDPage page : document.getPages()) {
-            PDResources resources = page.getResources();
-            for (COSName name : resources.getXObjectNames()) {
-                PDXObject object;
-                try {
-                    object = resources.getXObject(name);
-                } catch (Exception | Error e) {
-                    continue;
-                }
-                if (object instanceof PDImageXObject) {
-                    PDImageXObject image = (PDImageXObject) object;
-                    try {
-                        res.add(image.getImage());
-                    } catch (Exception | Error e) {
-                    }
-                }
-            }
-        }
-        try {
-            document.close();
-        } catch (Exception | Error e) {
-            System.err.println("Ошибка закрытия pdf-документа");
-        }
-        return res;
-    }
-
-    public static ArrayList<BufferedImage> img_from_docx(File file) {
-        XWPFDocument docx;
-        try {
-            docx = new XWPFDocument(new FileInputStream(file));
-        } catch (Exception | Error e) {
-            System.err.println("err img_from_docx: " + file.getPath());
-            return null;
-        }
-        Iterator<XWPFPictureData> it = docx.getAllPictures().iterator();
-        ArrayList result = new ArrayList();
-        while (it.hasNext()) {
-            byte[] data = it.next().getData();
-            ByteArrayInputStream stream = new ByteArrayInputStream(data);
-            try {
-                result.add(ImageIO.read(stream));
-            } catch (Exception | Error ignored) {
-            }
-        }
-        try {
-            docx.close();
-        } catch (Exception | Error e) {
-            System.err.println("Ошибка закрытия docx-документа");
-        }
-        return result;
-    }
-
-    public static ArrayList<BufferedImage> img_from_doc(File file) {
-        HWPFDocument doc;
-        try {
-            doc = new HWPFDocument(new FileInputStream(file));
-        } catch (Exception | Error e) {
-            System.err.println("err img_from_doc: " + file.getPath());
-            return null;
-        }
-        List<Picture> pics = doc.getPicturesTable().getAllPictures();
-        ArrayList result = new ArrayList();
-        for (int i = 0; i < pics.size(); i++) {
-            Picture pic = (Picture) pics.get(i);
-            try {
-                FileOutputStream outputStream = new FileOutputStream(new File("data/tempimg"));
-                outputStream.write(pic.getContent());
-                outputStream.close();
-                result.add(loadBufferedImage(new File("data/tempimg")));
-            } catch (Exception | Error e) {
-            }
-        }
-        return result;
     }
 
     static void addImgNames(Map map, File file) {

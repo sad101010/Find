@@ -34,6 +34,7 @@ public class mainFindThread extends basicThread {
         }
         brute(MainCatalog);
         button.__switch(1);
+        //Выдает лишнее окно, если закрыть всю программу на крестик
         msg("Поиск завершен", owner);
         System.err.println(">" + current_time() + "  find thread finish");
     }
@@ -51,7 +52,7 @@ public class mainFindThread extends basicThread {
 
     private void dir_brute(File f) {
         //проверено: listFiles() может быть null
-        if (f.listFiles() == null) {
+        if (f == null || !f.exists() || f.listFiles() == null) {
             return;
         }
         for (File i : f.listFiles()) {

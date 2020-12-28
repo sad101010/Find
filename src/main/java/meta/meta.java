@@ -6,11 +6,9 @@ import java.util.TreeMap;
 import static meta.ApachePOI.AddDocTags;
 import static meta.FAttr.add_file_attr;
 import static meta.PDFBox.addPdfTags;
-import static meta.Tika.get_mime;
-import static meta.Tika.add_text_from_file;
-import static meta.db.add_names;
 import static meta.img.addImgNames;
 import static meta.img.add_images_from_document;
+import static util.util.get_mime;
 import static util.xml.AddDocxTags;
 
 public class meta {
@@ -30,9 +28,6 @@ public class meta {
             case "application/msword":
                 AddDocTags(file, map);
                 break;
-            default:
-                add_names(map, file);
-                break;
         }
     }
 
@@ -42,7 +37,8 @@ public class meta {
             add_file_attr(file, result);
         }
         if (expr.check.text != null) {
-            add_text_from_file(result, file);
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //add_text_from_file(result, file);
         }
         if (expr.analyze.need_img()) {
             add_images_from_document(result, file);

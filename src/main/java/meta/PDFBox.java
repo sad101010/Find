@@ -1,14 +1,56 @@
 package meta;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
+import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDResources;
+import org.apache.pdfbox.pdmodel.graphics.PDXObject;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.text.PDFTextStripper;
 import util.DateBean;
 
 public class PDFBox {
+
+    public static ArrayList<BufferedImage> img_from_pdf(File file) {
+        PDDocument document;
+        try {
+            document = PDDocument.load(file);
+        } catch (Exception | Error e) {
+            System.err.println("err img_from_pdf");
+            return null;
+        }
+        ArrayList res = new ArrayList();
+        for (PDPage page : document.getPages()) {
+            PDResources resources = page.getResources();
+            for (COSName name : resources.getXObjectNames()) {
+                PDXObject object;
+                try {
+                    object = resources.getXObject(name);
+                } catch (Exception | Error e) {
+                    continue;
+                }
+                if (object instanceof PDImageXObject) {
+                    PDImageXObject image = (PDImageXObject) object;
+                    try {
+                        res.add(image.getImage());
+                    } catch (Exception | Error e) {
+                    }
+                }
+            }
+        }
+        try {
+            document.close();
+        } catch (Exception | Error e) {
+            System.err.println("Ошибка закрытия pdf-документа");
+        }
+        return res;
+    }
 
     static void addPdfTags(File file, Map map) {
         PDDocument doc;

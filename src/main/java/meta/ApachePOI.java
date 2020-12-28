@@ -1,29 +1,88 @@
 package meta;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import javax.imageio.ImageIO;
+import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.extractor.WordExtractor;
+import org.apache.poi.hwpf.usermodel.Picture;
 import org.apache.poi.poifs.filesystem.DirectoryEntry;
 import org.apache.poi.poifs.filesystem.DocumentInputStream;
 import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFPictureData;
 import util.DateBean;
 import util.TimeBean;
+import static util.img.loadBufferedImage;
 
 public class ApachePOI {
+
+    static ArrayList<BufferedImage> img_from_docx(File file) {
+        XWPFDocument docx;
+        try {
+            docx = new XWPFDocument(new FileInputStream(file));
+        } catch (Exception | Error e) {
+            return null;
+        }
+        Iterator<XWPFPictureData> it = docx.getAllPictures().iterator();
+        ArrayList result = new ArrayList();
+        while (it.hasNext()) {
+            byte[] data = it.next().getData();
+            ByteArrayInputStream stream = new ByteArrayInputStream(data);
+            try {
+                result.add(ImageIO.read(stream));
+            } catch (Exception | Error ignored) {
+            }
+        }
+        try {
+            docx.close();
+        } catch (Exception | Error e) {
+        }
+        return result;
+    }
+
+    static ArrayList<BufferedImage> img_from_doc(File file) {
+        HWPFDocument doc;
+        try {
+            doc = new HWPFDocument(new FileInputStream(file));
+        } catch (Exception | Error e) {
+            return null;
+        }
+        List<Picture> pics = doc.getPicturesTable().getAllPictures();
+        ArrayList result = new ArrayList();
+        for (int i = 0; i < pics.size(); i++) {
+            Picture pic = (Picture) pics.get(i);
+            try {
+                FileOutputStream outputStream = new FileOutputStream(new File("data/tempimg"));
+                outputStream.write(pic.getContent());
+                outputStream.close();
+                result.add(loadBufferedImage(new File("data/tempimg")));
+            } catch (Exception | Error e) {
+            }
+        }
+        return result;
+    }
 
     public static String getDocText(File file) {
         WordExtractor extractor;
         try {
             NPOIFSFileSystem fs = new NPOIFSFileSystem(file);
             extractor = new WordExtractor(fs.getRoot());
-        } catch (Exception|Error e) {
+        } catch (Exception | Error e) {
             return null;
         }
-        StringBuilder s=new StringBuilder();
+        StringBuilder s = new StringBuilder();
         for (String rawText : extractor.getParagraphText()) {
             String text = extractor.stripFields(rawText);
             s.append(text);

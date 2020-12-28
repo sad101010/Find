@@ -36,6 +36,9 @@ public class type {
                 type = line;
                 continue;
             }
+            if (type == null) {
+                exit_with_err_msg("Ошибка чтения типов", null);
+            }
             typeMap.put(line, type);
         }
         try {

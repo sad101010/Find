@@ -7,18 +7,18 @@ import java.util.Date;
 
 public class DateBean extends Date {
 
-    @Override
-    public String toString() {
-        DateFormat f = new SimpleDateFormat(formats[0]);
-        return f.format(this);
-    }
-
     private static final String formats[] = {
         "dd.MM.yyyy",
         "yyyy:MM:dd",
         "yyyy-MM-dd",
         "dd/MM/yyyy"
     };
+
+    @Override
+    public String toString() {
+        DateFormat f = new SimpleDateFormat(formats[0]);
+        return f.format(this);
+    }
 
     public static DateBean MSFileTimeToDateBean(long _100Nanos) {
         //https://stackoverflow.com/questions/5200192/convert-64-bit-windows-number-to-time-java
@@ -50,9 +50,4 @@ public class DateBean extends Date {
     private DateBean(long milis) {
         super(milis);
     }
-
-    /*public static String TryParseDate(String s) {
-        DateBean dateBean = valueOf(s);
-        return dateBean == null ? s : dateBean.toString();
-    }*/
 }

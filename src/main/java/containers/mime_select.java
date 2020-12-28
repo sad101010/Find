@@ -10,7 +10,6 @@ import static swing.util.*;
 import expr.check;
 import java.util.Map;
 import static meta.map.mime_map;
-import org.joda.time.chrono.StrictChronology;
 import swing.dialog;
 
 public class mime_select extends useful_container {

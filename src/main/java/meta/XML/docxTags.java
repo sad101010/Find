@@ -1,4 +1,4 @@
-package util;
+package meta.XML;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,8 +14,9 @@ import static meta.type.parseFieldValue;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import util.TimeBean;
 
-public class xml {
+public class docxTags {
 
     private static final Map<String, String> DocxNames = mimedb.get("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
 
@@ -26,6 +27,7 @@ public class xml {
         } catch (IOException ex) {
             return false;
         }
+        //заменить на просто получение файлов
         for (Enumeration e = zip.entries(); e.hasMoreElements();) {
             ZipEntry entry = (ZipEntry) e.nextElement();
             if (entry.isDirectory()) {
@@ -56,20 +58,16 @@ public class xml {
     }
 
     private static boolean load_xml(InputStream inputStream, Map<String, String> map) {
-        DocumentBuilder documentBuilder;
         Document document;
         try {
-            documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            document = documentBuilder.parse(inputStream);
+            document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputStream);
         } catch (Exception | Error e) {
             return false;
         }
-        NodeList nodeList = document.getDocumentElement().getChildNodes();
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Node node = nodeList.item(i);
+        Node node = document.getDocumentElement().getFirstChild();
+        while (node != null) {
             String name = DocxNames.get(node.getNodeName());
             if (name == null) {
-                System.err.println("DocxNames does not have name: " + node.getNodeName());
                 return false;
             }
             Object value;
@@ -79,10 +77,10 @@ public class xml {
                 value = parseFieldValue(name, node.getTextContent());
             }
             if (value == null) {
-                System.err.println("DocxNames null object: " + node.getNodeName() + " -> " + node.getTextContent());
                 return false;
             }
             map.put(name, value.toString());
+            node = node.getNextSibling();
         }
         return true;
     }
