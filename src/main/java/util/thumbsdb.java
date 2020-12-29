@@ -46,6 +46,10 @@ public class thumbsdb {
         } catch (Exception | Error e) {
             return null;
         }
+        if (image == null) {
+            //странно, должно было отловиться в try выше
+            return null;
+        }
         double a = 200.0 / Math.max(image.getHeight(), image.getWidth());
         int w = (int) (image.getWidth() * a);
         int h = (int) (image.getHeight() * a);

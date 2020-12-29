@@ -44,6 +44,9 @@ public class meta {
             case "application/msword":
                 AddDocTags(file, map);
                 break;
+            case "application/vnd.oasis.opendocument.text":
+                ODF.AddOdtTags(file, map);
+                break;
         }
     }
 

@@ -22,10 +22,7 @@ public class docxTags {
         } catch (Exception | Error e) {
             return false;
         }
-        if (!load_xml(zip, "docProps/core.xml", map) || !load_xml(zip, "docProps/app.xml", map)) {
-            return false;
-        }
-        return true;
+        return load_xml(zip, "docProps/core.xml", map) && load_xml(zip, "docProps/app.xml", map);
     }
 
     private static boolean load_xml(ZipFile zip, String filename, Map<String, String> map) {

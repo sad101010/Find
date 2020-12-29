@@ -5,10 +5,9 @@ import java.util.TreeMap;
 
 public class map {
 
-    public static final Map<String,String> mime_map = new TreeMap<>();
+    public static final Map<String, String> mime_map = new TreeMap<>();
 
     static {
-        mime_map.put("Не задан", "Не задан");
         mime_map.put("application/msword", "doc,dot");
         mime_map.put("application/pdf", "pdf");
         mime_map.put("application/vnd.ms-excel", "xls,xlm,xla,xlc,xlt,xlw,xll,xld");

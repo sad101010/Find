@@ -20,13 +20,9 @@ public class CritContextButton extends transparent_button {
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                clicked();
+                dialog __dialog = new dialog(owner, "Контекст");
+                pop_dialog(new context_container(__dialog), __dialog);
             }
         });
-    }
-
-    private void clicked() {
-        dialog __dialog = new dialog(owner, "Контекст");
-        pop_dialog(new context_container(__dialog), __dialog);
     }
 }

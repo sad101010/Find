@@ -23,10 +23,7 @@ public class ODF {
         } catch (Exception | Error e) {
             return false;
         }
-        if (!load_xml(zip, "meta.xml", map)) {
-            return false;
-        }
-        return true;
+        return load_xml(zip, "meta.xml", map);
     }
 
     private static boolean load_xml(ZipFile zip, String filename, Map<String, String> map) {
@@ -45,7 +42,7 @@ public class ODF {
         } catch (Exception | Error e) {
             return false;
         }
-        if (!node.getParentNode().getNodeName().equals("office:document-meta") || !node.getNodeName().equals("office:meta")) {
+        if (!node.getParentNode().getParentNode().getNodeName().equals("office:document-meta") || !node.getParentNode().getNodeName().equals("office:meta")) {
             return false;
         }
         while (node != null) {

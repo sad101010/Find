@@ -1,58 +1,116 @@
-/home/sad/Документы/______________ __.__.pdf
-/home/sad/Документы/Защита.pdf
-/home/sad/Документы/__________________.pdf
-/home/sad/Документы/ПЕЧАТЬ/Дневник преддипломной практики. Смирнов Д.А..pdf
-/home/sad/Документы/ПЕЧАТЬ/Данные для учета успеваемости студентов в БАРС. Смирнов Д. А. 631 группа.pdf
-/home/sad/Документы/ПЕЧАТЬ/Отчет о преддипломной практике. Смирнов Д. А. 631 группа.pdf
-/home/sad/Документы/клякса from word2007.pdf
-/home/sad/Документы/урок цифры/a1ab16db6224dc398abb4fc1f571fa49.pdf
-/home/sad/Документы/урок цифры/aaef2b023facbef74cf24f4331ffe746.pdf
-/home/sad/Документы/урок цифры/bdfe409b2039d31a80e3d4dd931ca9a0 (2).pdf
-/home/sad/Документы/урок цифры/95821937eafac5ca448f232777df3243.pdf
-/home/sad/Документы/урок цифры/1c88afbb03f8c5514db8f55c5efc9fb4.pdf
-/home/sad/Документы/урок цифры/7ad9dc3763960521054e94f09f276965.pdf
-/home/sad/Документы/урок цифры/bdfe409b2039d31a80e3d4dd931ca9a0.pdf
-/home/sad/Документы/______________ __.__0.pdf
-/home/sad/Документы/DLP.pdf
-/home/sad/Документы/8 __________.pdf
-/home/sad/Документы/______/Смирнов Д.А.pdf
-/home/sad/Документы/dipl.pdf
-/home/sad/Документы/sberbank_12-05-2020_22-53-511464493196.pdf
-/home/sad/Документы/кредиты/Kvitantsia1170161570.pdf
-/home/sad/Документы/кредиты/ul-1197746645326-20191213084809.pdf
-/home/sad/Документы/кредиты/ul-1197746645326-20191223214543.pdf
-/home/sad/Документы/кредиты/Справка Смирнов.pdf
-/home/sad/Документы/кредиты/Квитанция1.pdf
-/home/sad/Документы/кредиты/Квитанция(1).pdf
-/home/sad/Документы/кредиты/Квитанция.pdf
-/home/sad/Документы/кредиты/example_big_zaim.pdf
-/home/sad/Документы/кредиты/Квитанция297200146.pdf
-/home/sad/Документы/кредиты/Kvitantsia297200146.pdf
-/home/sad/Документы/кредиты/Квитанция1275683326.pdf
-/home/sad/Документы/кредиты/Квитанция1170161570.pdf
-/home/sad/Документы/кредиты/Квитанция543115391.pdf
-/home/sad/Документы/кредиты/Квитанция1417984905.pdf
-/home/sad/Документы/9 __________.pdf
-/home/sad/Документы/gost.pdf
-/home/sad/Документы/10 __________.pdf
-/home/sad/Документы/7 __________.pdf
-/home/sad/Документы/fgos_ru_sred.pdf.pdf
-/home/sad/Документы/10_demo-1.pdf
-/home/sad/Документы/печать/титульный.pdf
-/home/sad/Документы/печать/bars2.pdf
-/home/sad/Документы/печать/bars.pdf
-/home/sad/Документы/Файловый ввод-вывод.pdf
-/home/sad/Документы/fgos_ru_osnov.pdf.pdf
-/home/sad/Документы/meta_vertical_26_56.pdf
-/home/sad/Документы/1337d22e-e733-4cb7-b2ff-6b5b42392d87.pdf
-/home/sad/Документы/11 __________.pdf
-/home/sad/Документы/meta_vertical_2_24.pdf
-/home/sad/Документы/_________________________________________________4.pdf
-/home/sad/mvn_try_push_to_git/mvn_find/______________ __.__.pdf
-/home/sad/TestCurrent/Без имени 2.pdf
-/home/sad/TestCurrent/Без имени 3.pdf
-/home/sad/TestCurrent/Без имени 1.pdf
-/home/sad/TestCurrent/odt to pdf dog.pdf
-/home/sad/Видео/631 Смирнов Д. А. Преддипломная практика/Дневник преддипломной практики. Смирнов Д.А..pdf
-/home/sad/Видео/631 Смирнов Д. А. Преддипломная практика/Данные для учета успеваемости студентов в БАРС. Смирнов Д. А. 631 группа.pdf
-/home/sad/Видео/631 Смирнов Д. А. Преддипломная практика/Отчет о преддипломной практике. Смирнов Д. А. 631 группа.pdf
+/home/sad/TestDocuments/dog (27-я копия).odt
+/home/sad/TestDocuments/dog (95-я копия).odt
+/home/sad/TestDocuments/dog (61-я копия).odt
+/home/sad/TestDocuments/dog (111-я копия).odt
+/home/sad/TestDocuments/dog (99-я копия).odt
+/home/sad/TestDocuments/dog (56-я копия).odt
+/home/sad/TestDocuments/dog (74-я копия).odt
+/home/sad/TestDocuments/dog (5-я копия).odt
+/home/sad/TestDocuments/dog (53-я копия).odt
+/home/sad/TestDocuments/dog (другая копия).odt
+/home/sad/TestDocuments/dog (15-я копия).odt
+/home/sad/TestDocuments/dog (9-я копия).odt
+/home/sad/TestDocuments/dog (22-я копия).odt
+/home/sad/TestDocuments/dog (94-я копия).odt
+/home/sad/TestDocuments/dog (65-я копия).odt
+/home/sad/TestDocuments/dog (67-я копия).odt
+/home/sad/TestDocuments/dog (78-я копия).odt
+/home/sad/TestDocuments/dog (80-я копия).odt
+/home/sad/TestDocuments/dog (93-я копия).odt
+/home/sad/TestDocuments/dog (32-я копия).odt
+/home/sad/TestDocuments/dog (41-я копия).odt
+/home/sad/TestDocuments/dog (48-я копия).odt
+/home/sad/TestDocuments/dog (37-я копия).odt
+/home/sad/TestDocuments/dog (110-я копия).odt
+/home/sad/TestDocuments/dog (102-я копия).odt
+/home/sad/TestDocuments/dog (25-я копия).odt
+/home/sad/TestDocuments/dog (51-я копия).odt
+/home/sad/TestDocuments/dog (33-я копия).odt
+/home/sad/TestDocuments/dog (19-я копия).odt
+/home/sad/TestDocuments/dog (49-я копия).odt
+/home/sad/TestDocuments/dog (72-я копия).odt
+/home/sad/TestDocuments/dog (13-я копия).odt
+/home/sad/TestDocuments/dog (45-я копия).odt
+/home/sad/TestDocuments/dog (55-я копия).odt
+/home/sad/TestDocuments/dog (12-я копия).odt
+/home/sad/TestDocuments/dog (69-я копия).odt
+/home/sad/TestDocuments/dog (3-я копия).odt
+/home/sad/TestDocuments/dog (107-я копия).odt
+/home/sad/TestDocuments/dog (50-я копия).odt
+/home/sad/TestDocuments/dog (106-я копия).odt
+/home/sad/TestDocuments/dog (86-я копия).odt
+/home/sad/TestDocuments/dog (75-я копия).odt
+/home/sad/TestDocuments/dog (35-я копия).odt
+/home/sad/TestDocuments/dog (83-я копия).odt
+/home/sad/TestDocuments/dog (6-я копия).odt
+/home/sad/TestDocuments/dog (100-я копия).odt
+/home/sad/TestDocuments/dog (113-я копия).odt
+/home/sad/TestDocuments/dog (11-я копия).odt
+/home/sad/TestDocuments/dog (70-я копия).odt
+/home/sad/TestDocuments/dog (28-я копия).odt
+/home/sad/TestDocuments/dog (58-я копия).odt
+/home/sad/TestDocuments/dog (77-я копия).odt
+/home/sad/TestDocuments/dog (92-я копия).odt
+/home/sad/TestDocuments/dog (85-я копия).odt
+/home/sad/TestDocuments/dog (115-я копия).odt
+/home/sad/TestDocuments/dog (40-я копия).odt
+/home/sad/TestDocuments/dog (21-я копия).odt
+/home/sad/TestDocuments/dog (71-я копия).odt
+/home/sad/TestDocuments/dog (31-я копия).odt
+/home/sad/TestDocuments/dog (60-я копия).odt
+/home/sad/TestDocuments/dog (114-я копия).odt
+/home/sad/TestDocuments/dog (39-я копия).odt
+/home/sad/TestDocuments/dog (81-я копия).odt
+/home/sad/TestDocuments/dog (29-я копия).odt
+/home/sad/TestDocuments/dog (90-я копия).odt
+/home/sad/TestDocuments/dog (54-я копия).odt
+/home/sad/TestDocuments/dog (43-я копия).odt
+/home/sad/TestDocuments/dog (103-я копия).odt
+/home/sad/TestDocuments/dog (42-я копия).odt
+/home/sad/TestDocuments/dog (91-я копия).odt
+/home/sad/TestDocuments/dog (84-я копия).odt
+/home/sad/TestDocuments/dog (47-я копия).odt
+/home/sad/TestDocuments/dog (96-я копия).odt
+/home/sad/TestDocuments/dog (30-я копия).odt
+/home/sad/TestDocuments/dog (98-я копия).odt
+/home/sad/TestDocuments/dog (66-я копия).odt
+/home/sad/TestDocuments/dog (16-я копия).odt
+/home/sad/TestDocuments/dog (57-я копия).odt
+/home/sad/TestDocuments/dog.odt
+/home/sad/TestDocuments/dog (105-я копия).odt
+/home/sad/TestDocuments/dog (44-я копия).odt
+/home/sad/TestDocuments/dog (14-я копия).odt
+/home/sad/TestDocuments/dog (79-я копия).odt
+/home/sad/TestDocuments/dog (104-я копия).odt
+/home/sad/TestDocuments/dog (копия).odt
+/home/sad/TestDocuments/dog (26-я копия).odt
+/home/sad/TestDocuments/dog (36-я копия).odt
+/home/sad/TestDocuments/dog (101-я копия).odt
+/home/sad/TestDocuments/dog (4-я копия).odt
+/home/sad/TestDocuments/dog (18-я копия).odt
+/home/sad/TestDocuments/dog (63-я копия).odt
+/home/sad/TestDocuments/dog (20-я копия).odt
+/home/sad/TestDocuments/dog (109-я копия).odt
+/home/sad/TestDocuments/dog (7-я копия).odt
+/home/sad/TestDocuments/dog (87-я копия).odt
+/home/sad/TestDocuments/dog (76-я копия).odt
+/home/sad/TestDocuments/dog (108-я копия).odt
+/home/sad/TestDocuments/dog (88-я копия).odt
+/home/sad/TestDocuments/dog (64-я копия).odt
+/home/sad/TestDocuments/dog (8-я копия).odt
+/home/sad/TestDocuments/dog (24-я копия).odt
+/home/sad/TestDocuments/dog (59-я копия).odt
+/home/sad/TestDocuments/dog (68-я копия).odt
+/home/sad/TestDocuments/dog (82-я копия).odt
+/home/sad/TestDocuments/dog (46-я копия).odt
+/home/sad/TestDocuments/dog (10-я копия).odt
+/home/sad/TestDocuments/dog (52-я копия).odt
+/home/sad/TestDocuments/dog (112-я копия).odt
+/home/sad/TestDocuments/dog (38-я копия).odt
+/home/sad/TestDocuments/dog (17-я копия).odt
+/home/sad/TestDocuments/dog (62-я копия).odt
+/home/sad/TestDocuments/dog (34-я копия).odt
+/home/sad/TestDocuments/dog (23-я копия).odt
+/home/sad/TestDocuments/dog (73-я копия).odt
+/home/sad/TestDocuments/dog (89-я копия).odt
+/home/sad/TestDocuments/dog (97-я копия).odt

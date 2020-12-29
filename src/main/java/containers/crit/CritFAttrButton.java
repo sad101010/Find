@@ -24,13 +24,9 @@ public class CritFAttrButton extends transparent_button {
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                fs_attributes_clicked();
+                dialog __dialog = new dialog(owner, "Атрибуты файла");
+                pop_dialog(new expr(area, FAttrFields, __dialog), __dialog);
             }
         });
-    }
-
-    private void fs_attributes_clicked() {
-        dialog __dialog = new dialog(owner, "Атрибуты файла");
-        pop_dialog(new expr(area, FAttrFields, __dialog), __dialog);
     }
 }

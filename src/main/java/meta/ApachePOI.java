@@ -86,7 +86,6 @@ public class ApachePOI {
         } catch (Exception | Error e) {
             return null;
         }
-        //static stripFields???
         StringBuilder s = new StringBuilder();
         for (String rawText : extractor.getParagraphText()) {
             s.append(WordExtractor.stripFields(rawText));
@@ -104,22 +103,20 @@ public class ApachePOI {
         DirectoryEntry root = fs.getRoot();
         DocumentInputStream stream;
         try {
-            stream = fs.createDocumentInputStream(info);
+            //строка "summaryinformation" с кодом 5 в начале строки
+            stream = fs.createDocumentInputStream(new String(new byte[]{5, 83, 117, 109, 109, 97, 114, 121, 73, 110, 102, 111, 114, 109, 97, 116, 105, 111, 110}));
         } catch (Exception | Error e) {
             return false;
         }
         byte[] content = new byte[stream.available()];
         try {
             stream.read(content);
-        } catch (IOException ex) {
+        } catch (Exception | Error e) {
             return false;
         }
         stream.close();
         return rawDocSummaryInfo(content, map);
     }
-
-    //строка "summaryinformation" с кодом 5 в начале строки
-    private static final String info = new String(new byte[]{5, 83, 117, 109, 109, 97, 114, 121, 73, 110, 102, 111, 114, 109, 97, 116, 105, 111, 110});
 
     private static String fields[] = {
         "Неизвестное поле",//0x00
@@ -150,7 +147,6 @@ public class ApachePOI {
         bb.order(ByteOrder.LITTLE_ENDIAN);
         bb.position(44);
         int base = bb.getInt(), size = bb.getInt(), n = bb.getInt();
-        System.out.println();
         for (; n > 0; n--) {
             short type = bb.getShort();
             bb.getShort();//есть padding из нулей
@@ -159,14 +155,8 @@ public class ApachePOI {
             if (type == 0x01 && value != null && !value.equals("1251")) {
                 return false;
             }
-            if (type < fields.length) {
-                if (value != null) {
-                    map.put(fields[type], value);
-                } else {
-                    System.err.println("RawDoc: null value for type " + type);
-                }
-            } else {
-                System.err.println("RawDoc: uknown type " + type);
+            if (type >= 0 && type < fields.length && value != null) {
+                map.put(fields[type], value);
             }
         }
         return true;

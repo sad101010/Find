@@ -39,11 +39,11 @@ public class expr {
     }
 
     private static ArrayList parseExpression(String s) {
-        ArrayList result = new ArrayList();
         ArrayList<String> tmp = sign_split(s);
         if (tmp == null) {
             return null;
         }
+        ArrayList result = new ArrayList();
         result.add(tmp.get(0));
         result.add(tmp.get(1));
         String value = tmp.get(2);
@@ -59,7 +59,6 @@ public class expr {
         }
         Object parsedValue = parseFieldValue(tmp.get(0), subValue);
         if (parsedValue == null) {
-            System.err.println(tmp.get(0)+" не распознан со значением "+value);
             return null;
         }
         result.add(parsedValue);

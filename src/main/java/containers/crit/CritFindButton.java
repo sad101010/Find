@@ -43,13 +43,12 @@ public class CritFindButton extends png_roll {
         if (getState() == 1) {
             int ret = yn_promt("Остановить поиск?", owner);
             if (ret == JOptionPane.YES_OPTION) {
-                System.err.println("tryin interrupt");
                 MainFindThread.kill();
                 __switch(1);
             }
             return;
         }
-        if(!initExpr(area.getText())){
+        if (!initExpr(area.getText())) {
             err_msg("Ошибка в выражении", owner);
             return;
         }

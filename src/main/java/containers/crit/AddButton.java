@@ -26,17 +26,13 @@ public class AddButton extends transparent_button {
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                add_clicked();
+                if (check.mime == null) {
+                    err_msg("Тип файлов не выбран", owner);
+                    return;
+                }
+                dialog __dialog = new dialog(owner, "Метаданные");
+                util.pop_dialog(new expr(area, rusNames(check.mime), __dialog), __dialog);
             }
         });
-    }
-
-    private void add_clicked() {
-        if (check.mime == null) {
-            err_msg("Тип файлов не выбран", owner);
-            return;
-        }
-        dialog __dialog = new dialog(owner, "Метаданные");
-        util.pop_dialog(new expr(area, rusNames(check.mime), __dialog), __dialog);
     }
 }

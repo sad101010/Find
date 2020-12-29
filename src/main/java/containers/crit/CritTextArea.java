@@ -17,8 +17,7 @@ public class CritTextArea extends JTextArea {
             public void mouseMoved(MouseEvent e) {
                 super.mouseMoved(e);
                 JTextArea textArea = (JTextArea) e.getSource();
-                Point pt = new Point(e.getX(), e.getY());
-                set_area_tooltip(textArea.viewToModel(pt));
+                set_area_tooltip(textArea.viewToModel(new Point(e.getX(), e.getY())));
             }
         });
     }

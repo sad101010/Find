@@ -16,13 +16,15 @@ public class mime_select extends useful_container {
 
     private final JComboBox box = new JComboBox();
     private final transparent_button ok = new transparent_button();
-    private final String __mime[] = new String[mime_map.size()];
-    private final String __ext[] = new String[mime_map.size()];
+    private final String __mime[] = new String[mime_map.size() + 1];
+    private final String __ext[] = new String[mime_map.size() + 1];
 
     public mime_select(dialog owner) {
         super(owner);
 
-        int i = 0;
+        __mime[0] = null;
+        __ext[0] = "Не задан";
+        int i = 1;
         for (Map.Entry<String, String> e : mime_map.entrySet()) {
             __mime[i] = e.getKey();
             __ext[i] = e.getValue();
@@ -31,13 +33,9 @@ public class mime_select extends useful_container {
 
         box.setModel(new DefaultComboBoxModel(__ext));
         if (check.mime == null) {
-            for (i = 0; i < __mime.length; i++) {
-                if (__mime[i].equals("Не задан")) {
-                    box.setSelectedIndex(i);
-                }
-            }
-        }else{
-            for (i = 0; i < __mime.length; i++) {
+            box.setSelectedIndex(0);
+        } else {
+            for (i = 1; i < __mime.length; i++) {
                 if (check.mime.equals(__mime[i])) {
                     box.setSelectedIndex(i);
                 }
@@ -52,7 +50,8 @@ public class mime_select extends useful_container {
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ok_clicked();
+                check.mime = __mime[box.getSelectedIndex()];
+                owner.dispose();
             }
         });
         append_middle_bottom(ok, box);
@@ -62,10 +61,5 @@ public class mime_select extends useful_container {
         for (Component c : getComponents()) {
             c.setFocusable(false);
         }
-    }
-
-    private void ok_clicked() {
-        check.mime = box.getSelectedItem().equals("Не задан") ? null : __mime[box.getSelectedIndex()];
-        owner.dispose();
     }
 }

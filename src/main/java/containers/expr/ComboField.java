@@ -27,8 +27,8 @@ import static util.util.err_msg;
 public class ComboField {
 
     private final JTextField textField = new JTextField();
-    private final JFormattedTextField timeField = new JFormattedTextField();
-    private final JFormattedTextField dateField = new JFormattedTextField();
+    private final JFormattedTextField timeField = new JFormattedTextField("23:59:59");
+    private final JFormattedTextField dateField = new JFormattedTextField("01.01.2000");
     private final JLabel formatLabel = new JLabel();
     private final Window owner;
     private final transparent_button dir = new transparent_button();
@@ -48,7 +48,7 @@ public class ComboField {
         }
     }
 
-    public String getTextIfVisible() {
+    public String getVisibleText() {
         if (textField.isVisible()) {
             return textField.getText();
         }
@@ -86,27 +86,24 @@ public class ComboField {
         timeField.setVisible(false);
         dateField.setVisible(false);
         formatLabel.setVisible(false);
-        switch (getFieldType(field)) {
-            case "@TimeBean":
-                timeField.setVisible(true);
-                formatLabel.setText("Формат - чч:мм:сс");
-                fit(formatLabel);
-                append_middle_bottom(formatLabel, textField);
-                formatLabel.setVisible(true);
-                break;
-            case "@DateBean":
-                dateField.setVisible(true);
-                formatLabel.setText("Формат - дд.мм.гггг");
-                fit(formatLabel);
-                append_middle_bottom(formatLabel, textField);
-                formatLabel.setVisible(true);
-                break;
-            case "@String":
-            case "@Long":
-                textField.setVisible(true);
-                formatLabel.setVisible(false);
-                break;
+        if (field.equals("Время редактирования")) {
+            timeField.setVisible(true);
+            formatLabel.setText("Формат - чч:мм:сс");
+            fit(formatLabel);
+            append_middle_bottom(formatLabel, textField);
+            formatLabel.setVisible(true);
+            return;
         }
+        if (getFieldType(field).equals("@DateBean")) {
+            dateField.setVisible(true);
+            formatLabel.setText("Формат - дд.мм.гггг");
+            fit(formatLabel);
+            append_middle_bottom(formatLabel, textField);
+            formatLabel.setVisible(true);
+            return;
+        }
+        textField.setVisible(true);
+        formatLabel.setVisible(false);
         dir.setVisible(field.equals("Изображения"));
     }
 
@@ -125,6 +122,7 @@ public class ComboField {
     }
 
     private ComboField(Window owner) throws ParseException {
+        this.owner = owner;
         MaskFormatter timeFormatter = new MaskFormatter();
         MaskFormatter dateFormatter = new MaskFormatter();
         timeFormatter.setMask("##:##:##");
@@ -133,7 +131,6 @@ public class ComboField {
         dateFormatter.install(dateField);
         timeField.setColumns(timeFormatter.getMask().length());
         dateField.setColumns(dateFormatter.getMask().length());
-        this.owner = owner;
         dir.setIcon(new ImageIcon("data/www.apache.org/folder.png"));
         dir.setToolTipText("Выбрать изображение");
         dir.addActionListener(new ActionListener() {

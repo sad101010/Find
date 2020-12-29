@@ -20,13 +20,9 @@ class MimeButton extends transparent_button {
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                clicked();
+                dialog __dialog = new dialog(owner, "Тип файлов");
+                util.pop_dialog(new mime_select(__dialog), __dialog);
             }
         });
-    }
-
-    private void clicked() {
-        dialog __dialog = new dialog(owner, "Тип файлов");
-        util.pop_dialog(new mime_select(__dialog), __dialog);
     }
 }

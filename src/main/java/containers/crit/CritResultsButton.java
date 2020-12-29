@@ -30,7 +30,6 @@ public class CritResultsButton extends transparent_button {
     }
 
     private void clicked() {
-        dialog __dialog = new dialog(owner, "Результаты");
         ArrayList<File> fileList = new ArrayList();
         breader reader;
         try {
@@ -52,11 +51,13 @@ public class CritResultsButton extends transparent_button {
             reader.close();
         } catch (Exception | Error e) {
             err_msg("Ошибка чтения результатов", owner);
+            return;
         }
         File[] fileArray = new File[fileList.size()];
         for (int i = 0; i < fileList.size(); i++) {
             fileArray[i] = fileList.get(i);
         }
+        dialog __dialog = new dialog(owner, "Результаты");
         pop_dialog(new FileList(fileArray, __dialog), __dialog);
     }
 }

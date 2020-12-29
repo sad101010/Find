@@ -43,7 +43,6 @@ public class view extends useful_container {
                 err_msg("Ошибка", owner);
             }
         });
-        //O.setEnabled(System.getProperty("os.name").startsWith("Windows"));
         add(O);
 
         file_open_button.setIcon(new ImageIcon("data/www.apache.org/open_file.png"));
@@ -84,16 +83,11 @@ public class view extends useful_container {
         }
     }
 
-    public static String[][] meta_to_table(Map<String, String> meta) {
-        ArrayList<String[]> list = new ArrayList();
+    private static String[][] meta_to_table(Map<String, String> meta) {
+        String[][] data = new String[meta.size()][2];
+        int i = 0;
         for (Map.Entry<String, String> e : meta.entrySet()) {
-            if (!e.getKey().startsWith("@")) {
-                list.add(new String[]{e.getKey(), e.getValue()});
-            }
-        }
-        String[][] data = new String[list.size()][2];
-        for (int i = 0; i < list.size(); i++) {
-            data[i] = list.get(i);
+            data[i++] = new String[]{e.getKey(), e.getValue()};
         }
         return data;
     }
@@ -101,8 +95,8 @@ public class view extends useful_container {
     private void choose_table() {
         String[][] data = FM.getState() == 1 ? normal : fattr;
         model.setDataVector(data, new String[]{"Поле", "Значение"});
-        int screen_width = Toolkit.getDefaultToolkit().getScreenSize().width;
-        setsize(scrollPane, Math.min(Math.max(pack_columns(table), 500), screen_width - 64), 300);
+        //почему scrollPane а не таблица?
+        setsize(scrollPane, Math.min(Math.max(pack_columns(table), 500), Toolkit.getDefaultToolkit().getScreenSize().width - 64), 300);
     }
 
     public view(File file, dialog owner) {

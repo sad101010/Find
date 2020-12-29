@@ -136,7 +136,7 @@ public class expr extends useful_container {
     private void ok_clicked() {
         String __field = box.getSelectedItem().toString();
         String __sign = sign.getText();
-        String __value = comboField.getTextIfVisible();
+        String __value = comboField.getVisibleText();
         if (__value == null) {
             err_msg("Ошибка", owner);
             return;

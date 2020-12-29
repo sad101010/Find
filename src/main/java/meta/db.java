@@ -90,8 +90,7 @@ public class db {
     }
 
     public static String[] rusNames(String mime) {
-        Map<String, String> names = mimedb.get(mime);
-        Object objects[] = names.values().toArray();
+        Object objects[] = mimedb.get(mime).values().toArray();
         String result[] = new String[objects.length];
         for (int i = 0; i < objects.length; i++) {
             result[i] = (String) objects[i];

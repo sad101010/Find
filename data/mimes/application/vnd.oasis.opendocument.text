@@ -22,9 +22,15 @@ meta:editing-cycles
 Редакция
 meta:generator
 Имя программы
+meta:template
+Шаблон
+meta:row-count
+Количество строк
 dc:title
 Название
 dc:subject
 Тема
 dc:date
 Дата
+dc:creator
+Последний автор

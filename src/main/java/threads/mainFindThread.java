@@ -70,6 +70,6 @@ public class mainFindThread extends basicThread {
         }
         search_results.println(path);
         search_results.flush();
-        ThumbsDB.add(path);
+        //ThumbsDB.add(path); --долго
     }
 }
