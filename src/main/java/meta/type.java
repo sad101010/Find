@@ -49,12 +49,8 @@ public class type {
         for (String mime : mimedb.keySet()) {
             Map<String, String> map = mimedb.get(mime);
             for (Map.Entry<String, String> e : map.entrySet()) {
-                if (e.getKey().equals(e.getValue())) {
-                    continue;
-                }
                 if (getFieldType(e.getValue()) == null) {
-                    System.err.println("Нет значения>" + e.getValue() + " >mime> " + mime);
-                    //exit_with_err_msg("Отсутствует один из типов", null);
+                    System.err.println("Нет значения>" + e.getValue() + ">mime>" + mime);
                     System.exit(-1);
                 }
             }
@@ -62,13 +58,15 @@ public class type {
         for (String FAttrField : FAttrFields) {
             if (getFieldType(FAttrField) == null) {
                 System.err.println("Нет значения>" + FAttrField + " >mime> FAttr");
-                //exit_with_err_msg("Отсутствует один из типов", null);
                 System.exit(-1);
             }
         }
     }
 
     public static Object parseFieldValue(String field, String value) {
+        if (field.equals("Время редактирования")) {
+            return TimeBean.valueOf(value);
+        }
         switch (getFieldType(field)) {
             case "@Long":
                 try {
@@ -76,8 +74,6 @@ public class type {
             } catch (Exception | Error e) {
                 return null;
             }
-            case "@TimeBean":
-                return TimeBean.valueOf(value);
             case "@DateBean":
                 return DateBean.valueOf(value);
             case "@String":

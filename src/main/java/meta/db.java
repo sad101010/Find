@@ -8,14 +8,12 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import static meta.map.mime_map;
-import static meta.type.getFieldType;
-import util.DateBean;
-import static util.directories.dirClear;
+import static util.directories.RemoveDirectoryContent;
 import static util.util.exit_with_err_msg;
 
 public class db {
 
-    public static final Map<String, Map<String, String>> mimedb = new TreeMap<String, Map<String, String>>();
+    static final Map<String, Map<String, String>> mimedb = new TreeMap<String, Map<String, String>>();
     private static int cat_length;
 
     static {
@@ -91,7 +89,7 @@ public class db {
     }
 
     public static void save_mimedb() {
-        dirClear("data/mimes");
+        RemoveDirectoryContent(new File("data/mimes"));
         for (String mime : mimedb.keySet()) {
             File file = new File("data/mimes/" + mime);
             file.getParentFile().mkdirs();

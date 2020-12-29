@@ -34,6 +34,7 @@ public class crit extends useful_container {
         find = new CritFindButton(owner, area);
         fs_attributes = new CritFAttrButton(owner, area);
         context = new CritContextButton(owner);
+        context.setEnabled(false);
         mime_choose = new MimeButton(owner);
         addButton = new AddButton(owner, area);
         or.setText("ИЛИ");

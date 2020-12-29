@@ -14,7 +14,7 @@ import swing.dialog;
 import util.breader;
 
 import javax.swing.*;
-import static meta.XML.ODF.AddOdtTags;
+import static meta.ODF.AddOdtTags;
 import util.thumbsdb;
 
 public class Find {

@@ -13,7 +13,7 @@ import static meta.type.getFieldType;
 import util.DateBean;
 import static util.util.get_mime;
 
-public class img {
+public class DrewNoakes {
 
     public static void add_images_from_document(Map map, File file) {
         String mime = get_mime(file);
@@ -30,7 +30,7 @@ public class img {
         }
     }
 
-    static void addImgNames(Map map, File file) {
+    static void addImgTags(Map map, File file) {
         String mime = get_mime(file);
         switch (mime) {
             case "image/jpeg":
@@ -50,18 +50,6 @@ public class img {
             for (Tag tag : directory.getTags()) {
                 int tagType = tag.getTagType();
                 String DirAndTag=directory.getName()+"::"+tag.getTagName();
-                /*
-                System.out.println("DirAndTag> " + DirAndTag);
-                System.out.println("Description> " + tag.getDescription());
-                System.out.println("as boolean: " + directory.getBooleanObject(tagType));
-                System.out.println("as string: " + directory.getString(tagType));
-                System.out.println("as date: " + DateToString(directory.getDate(tagType)));
-                System.out.println("as float: " + directory.getFloatObject(tagType));
-                System.out.println("as double: " + directory.getDoubleObject(tagType));
-                System.out.println("as int: " + directory.getInteger(tagType));
-                System.out.println("as long: " + directory.getLongObject(tagType));
-                System.out.println("-------------------------------------------");
-                */
                 String name = names.get(DirAndTag);
                 if (name == null || name.equals(tag.getTagName())) {
                     continue;

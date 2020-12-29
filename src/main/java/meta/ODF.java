@@ -1,4 +1,4 @@
-package meta.XML;
+package meta;
 
 import java.io.File;
 import java.io.InputStream;
@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.zip.ZipFile;
 import javax.xml.parsers.DocumentBuilderFactory;
 import static meta.db.mimedb;
-import meta.type;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -25,27 +24,18 @@ public class ODF {
         } catch (Exception | Error e) {
             return false;
         }
-        InputStream inputStream;
-        try {
-            inputStream = zip.getInputStream(zip.getEntry("meta.xml"));
-        } catch (Exception | Error e) {
-            return false;
-        }
-        if (!load_xml(inputStream, map)) {
-            return false;
-        }
-        try {
-            inputStream.close();
-        } catch (Exception | Error e) {
+        if (!load_xml(zip, "meta.xml", map)) {
             return false;
         }
         return true;
     }
 
-    private static boolean load_xml(InputStream inputStream, Map<String, String> map) {
+    private static boolean load_xml(ZipFile zip, String filename, Map<String, String> map) {
         Document document;
         try {
+            InputStream inputStream = zip.getInputStream(zip.getEntry(filename));
             document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputStream);
+            inputStream.close();
         } catch (Exception | Error e) {
             return false;
         }
