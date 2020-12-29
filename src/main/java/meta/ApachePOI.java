@@ -86,9 +86,10 @@ public class ApachePOI {
         } catch (Exception | Error e) {
             return null;
         }
+        //static stripFields???
         StringBuilder s = new StringBuilder();
         for (String rawText : extractor.getParagraphText()) {
-            s.append(extractor.stripFields(rawText));
+            s.append(WordExtractor.stripFields(rawText));
         }
         return s.toString();
     }
