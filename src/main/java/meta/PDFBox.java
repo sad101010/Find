@@ -22,23 +22,23 @@ public class PDFBox {
         try {
             document = PDDocument.load(file);
         } catch (Exception | Error e) {
-            System.err.println("err img_from_pdf");
             return null;
         }
         ArrayList res = new ArrayList();
         for (PDPage page : document.getPages()) {
-            PDResources resources = page.getResources();
-            for (COSName name : resources.getXObjectNames()) {
-                PDXObject object;
+            PDResources pd_resources = page.getResources();
+            for (COSName cos_name : pd_resources.getXObjectNames()) {
+                PDXObject pdx_object;
                 try {
-                    object = resources.getXObject(name);
+                    //долго
+                    pdx_object = pd_resources.getXObject(cos_name);
                 } catch (Exception | Error e) {
                     continue;
                 }
-                if (object instanceof PDImageXObject) {
-                    PDImageXObject image = (PDImageXObject) object;
+                if (pdx_object instanceof PDImageXObject) {
+                    PDImageXObject pd_image_x_object = (PDImageXObject) pdx_object;
                     try {
-                        res.add(image.getImage());
+                        res.add(pd_image_x_object.getImage());
                     } catch (Exception | Error e) {
                     }
                 }
@@ -47,7 +47,6 @@ public class PDFBox {
         try {
             document.close();
         } catch (Exception | Error e) {
-            System.err.println("Ошибка закрытия pdf-документа");
         }
         return res;
     }
@@ -88,26 +87,25 @@ public class PDFBox {
         }
     }
 
-    public static String getPDFText(File file) {
+    public static String getPDFText(File PDFFile) {
         PDFTextStripper pdfStripper;
         try {
             pdfStripper = new PDFTextStripper();
-        } catch (IOException ex) {
+        } catch (Exception | Error e) {
             return null;
         }
         pdfStripper.setStartPage(1);
         PDDocument doc;
         try {
-            doc = PDDocument.load(file);
-        } catch (IOException ex) {
+            doc = PDDocument.load(PDFFile);
+        } catch (Exception | Error e) {
             return null;
         }
         pdfStripper.setEndPage(doc.getNumberOfPages());
         try {
             return pdfStripper.getText(doc);
-        } catch (IOException ex) {
+        } catch (Exception | Error e) {
             return null;
         }
     }
-
 }

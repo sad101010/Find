@@ -35,19 +35,19 @@ public class ApachePOI {
         } catch (Exception | Error e) {
             return null;
         }
-        Iterator<XWPFPictureData> it = docx.getAllPictures().iterator();
         ArrayList result = new ArrayList();
-        while (it.hasNext()) {
-            byte[] data = it.next().getData();
-            ByteArrayInputStream stream = new ByteArrayInputStream(data);
+        for (XWPFPictureData pd : docx.getAllPictures()) {
             try {
-                result.add(ImageIO.read(stream));
+                ByteArrayInputStream bais = new ByteArrayInputStream(pd.getData());
+                result.add(ImageIO.read(bais));
+                bais.close();
             } catch (Exception | Error ignored) {
             }
         }
         try {
             docx.close();
         } catch (Exception | Error e) {
+            return null;
         }
         return result;
     }
@@ -59,15 +59,18 @@ public class ApachePOI {
         } catch (Exception | Error e) {
             return null;
         }
-        List<Picture> pics = doc.getPicturesTable().getAllPictures();
         ArrayList result = new ArrayList();
-        for (int i = 0; i < pics.size(); i++) {
-            Picture pic = (Picture) pics.get(i);
+        for (Picture pic : doc.getPicturesTable().getAllPictures()) {
             try {
-                FileOutputStream outputStream = new FileOutputStream(new File("data/tempimg"));
+                File tempimg = new File("data/tempimg");
+                FileOutputStream outputStream = new FileOutputStream(tempimg);
                 outputStream.write(pic.getContent());
                 outputStream.close();
-                result.add(loadBufferedImage(new File("data/tempimg")));
+                BufferedImage bimg = loadBufferedImage(new File("data/tempimg"));
+                tempimg.delete();
+                if (bimg != null) {
+                    result.add(bimg);
+                }
             } catch (Exception | Error e) {
             }
         }
@@ -77,6 +80,7 @@ public class ApachePOI {
     public static String getDocText(File file) {
         WordExtractor extractor;
         try {
+            //NPOIFS или POIFS??
             NPOIFSFileSystem fs = new NPOIFSFileSystem(file);
             extractor = new WordExtractor(fs.getRoot());
         } catch (Exception | Error e) {
@@ -84,8 +88,7 @@ public class ApachePOI {
         }
         StringBuilder s = new StringBuilder();
         for (String rawText : extractor.getParagraphText()) {
-            String text = extractor.stripFields(rawText);
-            s.append(text);
+            s.append(extractor.stripFields(rawText));
         }
         return s.toString();
     }

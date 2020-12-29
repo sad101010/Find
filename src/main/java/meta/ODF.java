@@ -17,7 +17,6 @@ public class ODF {
     private static final Map<String, String> OdtNames = mimedb.get("application/vnd.oasis.opendocument.text");
 
     public static boolean AddOdtTags(File zipFile, Map<String, String> map) {
-        //dc:date - неизвестный таг
         ZipFile zip;
         try {
             zip = new ZipFile(zipFile);
@@ -54,15 +53,17 @@ public class ODF {
                 NamedNodeMap attr = node.getAttributes();
                 for (int i = 0; i < attr.getLength(); i++) {
                     Node item = attr.item(i);
-                    put(item.getNodeName(), item.getTextContent(), map);
+                    if (!put(item.getNodeName(), item.getTextContent(), map)) {
+                        return false;
+                    }
                 }
             } else {
                 if (node.getNodeName().equals("meta:editing-duration")) {
-                    Duration dur = Duration.parse(node.getTextContent());
-                    TimeBean timeBean = TimeBean.valueOf(dur.toMillis() / 1000);
-                    map.put("Время редактирования", timeBean.toString());
+                    map.put("Время редактирования", TimeBean.valueOf(Duration.parse(node.getTextContent()).toMillis() / 1000).toString());
                 } else {
-                    put(node.getNodeName(), node.getTextContent(), map);
+                    if (!put(node.getNodeName(), node.getTextContent(), map)) {
+                        return false;
+                    }
                 }
             }
             node = node.getNextSibling();
@@ -70,13 +71,16 @@ public class ODF {
         return true;
     }
 
-    private static void put(String name, String value, Map<String, String> map) {
-        if (OdtNames.get(name) == null) {
-            System.err.println("ODF: неизвестное имя " + name);
-            return;
-        }
+    private static boolean put(String name, String value, Map<String, String> map) {
         String rusName = OdtNames.get(name);
+        if (rusName == null) {
+            return false;
+        }
         Object obj = type.parseFieldValue(rusName, value);
+        if (obj == null) {
+            return false;
+        }
         map.put(rusName, obj.toString());
+        return true;
     }
 }

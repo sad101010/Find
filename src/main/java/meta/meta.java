@@ -4,14 +4,30 @@ import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 import static meta.ApachePOI.AddDocTags;
+import static meta.ApachePOI.img_from_doc;
+import static meta.ApachePOI.img_from_docx;
 import static meta.FAttr.addFTags;
 import static meta.PDFBox.addPdfTags;
 import static meta.docxTags.AddDocxTags;
 import static meta.DrewNoakes.addImgTags;
-import static meta.DrewNoakes.add_images_from_document;
+import static meta.PDFBox.img_from_pdf;
 import static util.util.get_mime;
 
 public class meta {
+
+    private static void add_images_from_document(Map map, File file) {
+        switch (get_mime(file)) {
+            case "application/msword":
+                map.put("Изображения", img_from_doc(file));
+                break;
+            case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+                map.put("Изображения", img_from_docx(file));
+                break;
+            case "application/pdf":
+                map.put("Изображения", img_from_pdf(file));
+                break;
+        }
+    }
 
     private static void addTags(Map map, File file) {
         switch (get_mime(file)) {

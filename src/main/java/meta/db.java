@@ -2,13 +2,11 @@ package meta;
 
 import util.breader;
 import java.io.File;
-import java.io.PrintWriter;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import static meta.map.mime_map;
-import static util.directories.RemoveDirectoryContent;
 import static util.util.exit_with_err_msg;
 
 public class db {
@@ -25,12 +23,15 @@ public class db {
         try {
             cat_length = cat.getCanonicalPath().length();
         } catch (Exception | Error e) {
-            exit_with_err_msg("err in meta.mime.db mimedb load", null);
+            exit_with_err_msg("Ошибка инициализации БД", null);
         }
         load_mimes_brute(cat);
     }
 
     private static void load_mimes_brute(File file) {
+        if (file == null || !file.exists()) {
+            exit_with_err_msg("Ошибка инициализации БД", null);
+        }
         if (file.isDirectory()) {
             dir_brute(file);
         } else {
@@ -88,40 +89,11 @@ public class db {
         }
     }
 
-    public static void save_mimedb() {
-        RemoveDirectoryContent(new File("data/mimes"));
-        for (String mime : mimedb.keySet()) {
-            File file = new File("data/mimes/" + mime);
-            file.getParentFile().mkdirs();
-            PrintWriter writer;
-            try {
-                writer = new PrintWriter(file, "UTF-8");
-            } catch (Exception | Error e) {
-                continue;
-            }
-            for (Map.Entry<String, String> e : mimedb.get(mime).entrySet()) {
-                if (e.getKey().equals(e.getValue())) {
-                    continue;
-                }
-                writer.println(e.getKey());
-                writer.println(e.getValue());
-            }
-            writer.close();
-        }
-    }
-
     public static String[] rusNames(String mime) {
-        Set<String> set = new TreeSet<>();
         Map<String, String> names = mimedb.get(mime);
-        for (String k : names.keySet()) {
-            String v = names.get(k);
-            if (!k.equals(v)) {
-                set.add(v);
-            }
-        }
-        String[] result = new String[set.size()];
-        Object objects[] = set.toArray();
-        for (int i = 0; i < set.size(); i++) {
+        Object objects[] = names.values().toArray();
+        String result[] = new String[objects.length];
+        for (int i = 0; i < objects.length; i++) {
             result[i] = (String) objects[i];
         }
         return result;
